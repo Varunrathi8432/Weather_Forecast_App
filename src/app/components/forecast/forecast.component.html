@@ -1,0 +1,21 @@
+<section class="forecast" [attr.aria-label]="'forecast.heading' | translate">
+  <h2>{{ 'forecast.heading' | translate }}</h2>
+  <ol class="days">
+    @for (day of daily(); track day.date; let i = $index) {
+      <li class="day-card">
+        <div class="day">{{ i === 0 ? ('forecast.today' | translate) : (day.date | date: 'EEE') }}</div>
+        <div class="date">{{ day.date | date: 'MMM d' }}</div>
+        <div class="icon" aria-hidden="true">{{ info(day.weatherCode).icon }}</div>
+        <div class="label" [title]="info(day.weatherCode).label">{{ info(day.weatherCode).label }}</div>
+        <div class="temps">
+          <span class="high">{{ day.tempMax | number: '1.0-0' }}{{ tempUnit() }}</span>
+          <span class="low">{{ day.tempMin | number: '1.0-0' }}{{ tempUnit() }}</span>
+        </div>
+        <div class="precip">
+          <span aria-hidden="true">💧</span>
+          {{ day.precipitationProbability | number: '1.0-0' }}%
+        </div>
+      </li>
+    }
+  </ol>
+</section>

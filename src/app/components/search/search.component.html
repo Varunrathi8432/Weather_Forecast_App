@@ -1,0 +1,42 @@
+<div class="search" role="search">
+  <div class="search-row">
+    <label class="visually-hidden" for="city-input">{{ 'search.label' | translate }}</label>
+    <input
+      id="city-input"
+      type="search"
+      autocomplete="off"
+      [placeholder]="'search.placeholder' | translate"
+      [formControl]="query"
+      (keydown)="onKeydown($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      role="combobox"
+      aria-autocomplete="list"
+      aria-controls="search-listbox"
+      [attr.aria-expanded]="open()"
+    />
+    <button type="button" class="locate-btn" (click)="locateMe()" [title]="'search.locate' | translate">
+      <span aria-hidden="true">📍</span>
+      <span class="visually-hidden">{{ 'search.locate' | translate }}</span>
+    </button>
+  </div>
+
+  @if (open() && suggestions().length > 0) {
+    <ul id="search-listbox" class="suggestions" role="listbox">
+      @for (loc of suggestions(); track loc.id; let i = $index) {
+        <li
+          role="option"
+          [class.active]="i === activeIndex()"
+          [attr.aria-selected]="i === activeIndex()"
+          (mousedown)="select(loc)"
+        >
+          <span class="sug-name">{{ loc.name }}</span>
+          <span class="sug-meta">
+            @if (loc.admin1) { {{ loc.admin1 }}, }
+            {{ loc.country }}
+          </span>
+        </li>
+      }
+    </ul>
+  }
+</div>

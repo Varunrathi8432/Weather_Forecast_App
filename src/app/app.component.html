@@ -1,0 +1,63 @@
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="app-header" role="banner">
+  <div class="header-inner">
+    <a class="brand" routerLink="/" aria-label="Weather Forecast home">
+      <span class="brand-icon" aria-hidden="true">⛅</span>
+      <span class="brand-text">{{ 'app.title' | translate }}</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        {{ 'nav.home' | translate }}
+      </a>
+      <a routerLink="/favorites" routerLinkActive="active">{{ 'nav.favorites' | translate }}</a>
+      <a routerLink="/compare" routerLinkActive="active">{{ 'nav.compare' | translate }}</a>
+      <a routerLink="/map" routerLinkActive="active">{{ 'nav.map' | translate }}</a>
+      <a routerLink="/settings" routerLinkActive="active">{{ 'nav.settings' | translate }}</a>
+    </nav>
+
+    <div class="header-actions">
+      <label class="visually-hidden" for="lang-select">{{ 'nav.language' | translate }}</label>
+      <select
+        id="lang-select"
+        class="lang-select"
+        [value]="prefs.language()"
+        (change)="selectLanguage($event)"
+      >
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+      </select>
+
+      <button
+        type="button"
+        class="icon-btn"
+        (click)="toggleTheme()"
+        [attr.aria-label]="(theme.mode() === 'dark' ? 'nav.theme.light' : 'nav.theme.dark') | translate"
+        [attr.aria-pressed]="theme.mode() === 'dark'"
+      >
+        <span aria-hidden="true">{{ theme.mode() === 'dark' ? '☀️' : '🌙' }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="app-main" role="main" [@routeFade]="getAnimation()">
+  <router-outlet />
+</main>
+
+<footer class="app-footer">
+  <p>
+    {{ 'app.footer' | translate }}
+    · <kbd>?</kbd> {{ 'nav.shortcuts' | translate }}
+  </p>
+</footer>
+
+<app-error-toast />
+<app-offline-banner />
+<app-shortcut-help />
+
+<div class="install-slot">
+  <app-install-banner />
+</div>

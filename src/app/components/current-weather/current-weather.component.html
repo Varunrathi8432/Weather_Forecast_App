@@ -1,0 +1,77 @@
+<section class="current" [attr.aria-label]="'current.heading' | translate">
+  <header class="head">
+    <div>
+      <h2 class="location">
+        {{ location().name }}
+        @if (location().country) { <span class="country">, {{ location().country }}</span> }
+      </h2>
+      <p class="time">{{ current().time | date: 'EEEE, MMM d · HH:mm' }}</p>
+    </div>
+    <div class="head-actions">
+      <button
+        type="button"
+        class="icon-circle"
+        (click)="share()"
+        [attr.aria-label]="'current.share' | translate"
+        [title]="'current.share' | translate"
+      >
+        <span aria-hidden="true">🔗</span>
+      </button>
+      <button
+        type="button"
+        class="icon-circle fav"
+        (click)="toggleFavorite()"
+        [attr.aria-pressed]="isFavorite()"
+        [attr.aria-label]="(isFavorite() ? 'favorites.remove' : 'favorites.add') | translate"
+      >
+        <span aria-hidden="true">{{ isFavorite() ? '★' : '☆' }}</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="icon" aria-hidden="true">{{ info().icon }}</div>
+    <div class="temps">
+      <div class="temp">
+        {{ current().temperature | number: '1.0-0' }}<span class="unit">{{ tempUnit() }}</span>
+      </div>
+      <div class="label">{{ info().label }}</div>
+      <div class="feels">
+        {{ 'current.feelsLike' | translate }}
+        {{ current().apparentTemperature | number: '1.0-0' }}{{ tempUnit() }}
+      </div>
+    </div>
+  </div>
+
+  <dl class="stats">
+    <div>
+      <dt>{{ 'current.humidity' | translate }}</dt>
+      <dd>{{ current().humidity | number: '1.0-0' }}%</dd>
+    </div>
+    <div>
+      <dt>{{ 'current.wind' | translate }}</dt>
+      <dd>
+        {{ current().windSpeed | number: '1.0-0' }} {{ windUnit() }}
+        @if (current().windGusts) {
+          <span class="mini">· {{ 'current.gust' | translate }} {{ current().windGusts | number: '1.0-0' }}</span>
+        }
+      </dd>
+    </div>
+    <div>
+      <dt>{{ 'current.pressure' | translate }}</dt>
+      <dd>{{ current().pressure | number: '1.0-0' }} hPa</dd>
+    </div>
+    <div>
+      <dt>{{ 'current.precipitation' | translate }}</dt>
+      <dd>{{ current().precipitation | number: '1.0-1' }} {{ precipUnit() }}</dd>
+    </div>
+    <div>
+      <dt>{{ 'current.cloudCover' | translate }}</dt>
+      <dd>{{ current().cloudCover | number: '1.0-0' }}%</dd>
+    </div>
+    <div>
+      <dt>{{ 'current.dewPoint' | translate }}</dt>
+      <dd>{{ current().dewPoint | number: '1.0-0' }}{{ tempUnit() }}</dd>
+    </div>
+  </dl>
+</section>

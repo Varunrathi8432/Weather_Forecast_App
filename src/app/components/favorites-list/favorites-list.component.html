@@ -1,0 +1,28 @@
+<section class="favorites">
+  <h2>{{ 'favorites.heading' | translate }}</h2>
+  @if (prefs.favorites().length === 0) {
+    <p class="empty">{{ 'favorites.empty' | translate }}</p>
+  } @else {
+    <ul class="fav-list">
+      @for (loc of prefs.favorites(); track loc.id) {
+        <li>
+          <button type="button" class="fav-item" (click)="select(loc)">
+            <span class="name">{{ loc.name }}</span>
+            <span class="meta">
+              @if (loc.admin1) { {{ loc.admin1 }}, }
+              {{ loc.country }}
+            </span>
+          </button>
+          <button
+            type="button"
+            class="remove"
+            (click)="remove(loc.id, $event)"
+            [attr.aria-label]="'favorites.removeItem' | translate: { name: loc.name }"
+          >
+            ✕
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</section>

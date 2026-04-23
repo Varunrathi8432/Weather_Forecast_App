@@ -1,0 +1,124 @@
+{
+  "app": {
+    "title": "Weather Forecast",
+    "footer": "Data from Open-Meteo · Built with Angular"
+  },
+  "nav": {
+    "home": "Home",
+    "favorites": "Favorites",
+    "compare": "Compare",
+    "map": "Map",
+    "settings": "Settings",
+    "language": "Language",
+    "shortcuts": "keyboard shortcuts",
+    "theme": {
+      "light": "Switch to light mode",
+      "dark": "Switch to dark mode"
+    }
+  },
+  "search": {
+    "label": "Search for a city",
+    "placeholder": "Search city, town or postcode…",
+    "locate": "Use my location"
+  },
+  "current": {
+    "heading": "Current conditions",
+    "feelsLike": "Feels like",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "gust": "gust",
+    "pressure": "Pressure",
+    "precipitation": "Precipitation",
+    "cloudCover": "Cloud cover",
+    "dewPoint": "Dew point",
+    "share": "Share",
+    "copied": "Summary copied to clipboard.",
+    "shareFailed": "Could not share this forecast."
+  },
+  "forecast": {
+    "heading": "7-Day forecast",
+    "today": "Today"
+  },
+  "hourly": {
+    "heading": "Next 24 hours",
+    "ariaLabel": "Hourly temperature and precipitation chart"
+  },
+  "favorites": {
+    "title": "Favorite locations",
+    "subtitle": "Your saved places, ready to view.",
+    "heading": "Favorites",
+    "add": "Add to favorites",
+    "remove": "Remove from favorites",
+    "removeItem": "Remove {{name}}",
+    "empty": "You haven't saved any favorites yet.",
+    "hint": "Tip: open a city from"
+  },
+  "compare": {
+    "title": "Compare cities",
+    "subtitle": "Add up to {{max}} cities and see conditions side by side.",
+    "add": "Add a city",
+    "placeholder": "Search for another city to compare…",
+    "emptyTitle": "Nothing to compare yet",
+    "emptyBody": "Add a city to start comparing current conditions.",
+    "remove": "Remove",
+    "clear": "Clear all"
+  },
+  "map": {
+    "title": "Map view",
+    "subtitle": "See your selected location and favorites on a map.",
+    "aria": "Map of favorite and selected locations"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Customize units, theme, language, and alerts.",
+    "units": "Units",
+    "metric": "Metric",
+    "imperial": "Imperial",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "language": "Language",
+    "toggleUnits": "Toggle units",
+    "notifications": "Notifications",
+    "notificationsTitle": "Severe weather alerts",
+    "notificationsBody": "Get a push when severe conditions are forecast for a favorite.",
+    "notificationsOn": "Enabled",
+    "notificationsOff": "Enable",
+    "notificationsUnavailable": "Push notifications aren't configured on this deployment.",
+    "keyboard": "Keyboard shortcuts",
+    "showShortcuts": "Show shortcuts"
+  },
+  "state": {
+    "loading": "Loading weather…",
+    "welcomeTitle": "Welcome!",
+    "welcomeBody": "Search for a city or use your location to see the forecast.",
+    "offline": "You're offline — showing cached data.",
+    "refresh": "Refresh current weather"
+  },
+  "alerts": {
+    "heading": "Weather alerts"
+  },
+  "air": {
+    "heading": "Air quality"
+  },
+  "sun": {
+    "sunrise": "Sunrise",
+    "sunset": "Sunset"
+  },
+  "suggestions": {
+    "heading": "Today's suggestions",
+    "tag": "Activity AI",
+    "empty": "No strong recommendations — enjoy the day!"
+  },
+  "install": {
+    "pitch": "Install Weather Forecast for one-tap access.",
+    "cta": "Install"
+  },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "toggle": "Show this dialog"
+  },
+  "a11y": {
+    "updated": "Forecast updated for {{city}}. Currently {{temp}} degrees."
+  }
+}

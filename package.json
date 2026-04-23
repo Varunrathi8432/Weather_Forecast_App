@@ -1,0 +1,79 @@
+{
+  "name": "weather-forecast-app",
+  "version": "1.0.0",
+  "description": "Advanced Angular weather forecast app with PWA, charts, maps, i18n, air quality, push notifications, and activity AI.",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:prod": "ng build --configuration production",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
+    "test:watch": "ng test",
+    "lint": "ng lint",
+    "e2e": "cypress run",
+    "e2e:open": "cypress open",
+    "format": "prettier --write \"src/**/*.{ts,html,scss,json}\"",
+    "lhci": "lhci autorun",
+    "prepare": "husky"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^18.2.0",
+    "@angular/cdk": "^18.2.0",
+    "@angular/common": "^18.2.0",
+    "@angular/compiler": "^18.2.0",
+    "@angular/core": "^18.2.0",
+    "@angular/forms": "^18.2.0",
+    "@angular/material": "^18.2.0",
+    "@angular/platform-browser": "^18.2.0",
+    "@angular/platform-browser-dynamic": "^18.2.0",
+    "@angular/router": "^18.2.0",
+    "@angular/service-worker": "^18.2.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
+    "chart.js": "^4.4.0",
+    "leaflet": "^1.9.4",
+    "ng2-charts": "^6.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.10"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^18.2.0",
+    "@angular-eslint/builder": "^18.0.0",
+    "@angular-eslint/eslint-plugin": "^18.0.0",
+    "@angular-eslint/eslint-plugin-template": "^18.0.0",
+    "@angular-eslint/schematics": "^18.0.0",
+    "@angular-eslint/template-parser": "^18.0.0",
+    "@angular/cli": "^18.2.0",
+    "@angular/compiler-cli": "^18.2.0",
+    "@lhci/cli": "^0.14.0",
+    "@types/jasmine": "~5.1.0",
+    "@types/leaflet": "^1.9.12",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "cypress": "^13.14.0",
+    "cypress-axe": "^1.5.0",
+    "eslint": "^8.57.0",
+    "husky": "^9.1.0",
+    "jasmine-core": "~5.2.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.3.0",
+    "typescript": "~5.5.0"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,html,scss,json}": [
+      "prettier --write"
+    ],
+    "src/**/*.ts": [
+      "eslint --fix"
+    ]
+  }
+}

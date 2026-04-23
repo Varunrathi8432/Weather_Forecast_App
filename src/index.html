@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Weather Forecast — Current, hourly, and 7-day forecasts</title>
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta
+    name="description"
+    content="Fast, accessible Angular weather app: current conditions, hourly + 7-day forecasts, air quality, interactive maps, and offline PWA support."
+  />
+  <meta name="theme-color" content="#1976d2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0e1420" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Weather Forecast" />
+  <meta property="og:title" content="Weather Forecast — Current, hourly, and 7-day forecasts" />
+  <meta
+    property="og:description"
+    content="A modern Angular weather app with air quality, activity suggestions, and offline PWA support."
+  />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Weather Forecast" />
+  <meta
+    name="twitter:description"
+    content="Current, hourly, and 7-day forecasts with air quality, maps, and PWA offline support."
+  />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://api.open-meteo.com" crossorigin />
+  <link rel="preconnect" href="https://geocoding-api.open-meteo.com" crossorigin />
+  <link rel="preconnect" href="https://air-quality-api.open-meteo.com" crossorigin />
+  <link rel="dns-prefetch" href="https://tile.openstreetmap.org" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Weather Forecast",
+      "applicationCategory": "WeatherApplication",
+      "operatingSystem": "Web",
+      "description": "Current, hourly, and 7-day forecasts with air quality, maps, and PWA offline support.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  </script>
+</head>
+<body class="mat-typography">
+  <app-root>
+    <div class="app-loading">
+      <div class="spinner" aria-label="Loading application"></div>
+      <p>Loading weather…</p>
+    </div>
+  </app-root>
+  <noscript>Please enable JavaScript to use this weather app.</noscript>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<div class="page">
+  <header class="page-header">
+    <h1>{{ 'compare.title' | translate }}</h1>
+    <p>
+      {{ 'compare.subtitle' | translate: { max: store.maxCities } }}
+    </p>
+  </header>
+
+  <div class="search" [class.disabled]="!store.hasRoom()">
+    <label class="visually-hidden" for="compare-search">{{ 'compare.add' | translate }}</label>
+    <input
+      id="compare-search"
+      type="search"
+      autocomplete="off"
+      [formControl]="query"
+      [placeholder]="'compare.placeholder' | translate"
+      [disabled]="!store.hasRoom()"
+    />
+    @if (suggestions().length > 0 && store.hasRoom()) {
+      <ul class="suggestions" role="listbox">
+        @for (s of suggestions(); track s.id) {
+          <li>
+            <button type="button" (click)="add(s)">
+              <strong>{{ s.name }}</strong>
+              <span>
+                @if (s.admin1) { {{ s.admin1 }}, }
+                {{ s.country }}
+              </span>
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  @if (orderedBundles().length === 0) {
+    <div class="empty">
+      <h2>{{ 'compare.emptyTitle' | translate }}</h2>
+      <p>{{ 'compare.emptyBody' | translate }}</p>
+    </div>
+  } @else {
+    <section class="grid" @listStagger>
+      @for (entry of orderedBundles(); track entry.city.id) {
+        @if (entry.bundle) {
+          <app-compare-card [bundle]="entry.bundle" (remove)="store.remove($event)" />
+        } @else {
+          <app-skeleton-card />
+        }
+      }
+    </section>
+    <button type="button" class="clear" (click)="store.clear()">
+      {{ 'compare.clear' | translate }}
+    </button>
+  }
+</div>

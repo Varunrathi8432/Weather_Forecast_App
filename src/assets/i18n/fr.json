@@ -1,0 +1,117 @@
+{
+  "app": {
+    "title": "Prévisions météo",
+    "footer": "Données d'Open-Meteo · Réalisé avec Angular"
+  },
+  "nav": {
+    "home": "Accueil",
+    "favorites": "Favoris",
+    "compare": "Comparer",
+    "map": "Carte",
+    "settings": "Réglages",
+    "language": "Langue",
+    "shortcuts": "raccourcis clavier",
+    "theme": {
+      "light": "Passer en mode clair",
+      "dark": "Passer en mode sombre"
+    }
+  },
+  "search": {
+    "label": "Rechercher une ville",
+    "placeholder": "Rechercher ville, commune ou code postal…",
+    "locate": "Utiliser ma position"
+  },
+  "current": {
+    "heading": "Conditions actuelles",
+    "feelsLike": "Ressenti",
+    "humidity": "Humidité",
+    "wind": "Vent",
+    "gust": "rafale",
+    "pressure": "Pression",
+    "precipitation": "Précipitations",
+    "cloudCover": "Couverture nuageuse",
+    "dewPoint": "Point de rosée",
+    "share": "Partager",
+    "copied": "Résumé copié dans le presse-papiers.",
+    "shareFailed": "Impossible de partager les prévisions."
+  },
+  "forecast": {
+    "heading": "Prévisions 7 jours",
+    "today": "Aujourd'hui"
+  },
+  "hourly": {
+    "heading": "Prochaines 24 h",
+    "ariaLabel": "Graphique horaire température et précipitations"
+  },
+  "favorites": {
+    "title": "Lieux favoris",
+    "subtitle": "Vos lieux enregistrés, prêts à consulter.",
+    "heading": "Favoris",
+    "add": "Ajouter aux favoris",
+    "remove": "Retirer des favoris",
+    "removeItem": "Retirer {{name}}",
+    "empty": "Vous n'avez encore aucun favori.",
+    "hint": "Astuce : ouvrez une ville depuis"
+  },
+  "compare": {
+    "title": "Comparer des villes",
+    "subtitle": "Ajoutez jusqu'à {{max}} villes pour comparer les conditions.",
+    "add": "Ajouter une ville",
+    "placeholder": "Rechercher une autre ville à comparer…",
+    "emptyTitle": "Rien à comparer pour l'instant",
+    "emptyBody": "Ajoutez une ville pour comparer les conditions.",
+    "remove": "Retirer",
+    "clear": "Tout effacer"
+  },
+  "map": {
+    "title": "Vue carte",
+    "subtitle": "Voyez votre sélection et vos favoris sur la carte.",
+    "aria": "Carte des lieux favoris et sélectionnés"
+  },
+  "settings": {
+    "title": "Réglages",
+    "subtitle": "Personnalisez unités, thème, langue et alertes.",
+    "units": "Unités",
+    "metric": "Métrique",
+    "imperial": "Impérial",
+    "theme": "Thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "language": "Langue",
+    "toggleUnits": "Changer d'unités",
+    "notifications": "Notifications",
+    "notificationsTitle": "Alertes météo sévère",
+    "notificationsBody": "Recevez une notification en cas de conditions sévères sur un favori.",
+    "notificationsOn": "Activées",
+    "notificationsOff": "Activer",
+    "notificationsUnavailable": "Les notifications push ne sont pas configurées.",
+    "keyboard": "Raccourcis clavier",
+    "showShortcuts": "Afficher les raccourcis"
+  },
+  "state": {
+    "loading": "Chargement de la météo…",
+    "welcomeTitle": "Bienvenue !",
+    "welcomeBody": "Recherchez une ville ou utilisez votre position pour voir les prévisions.",
+    "offline": "Hors ligne — données en cache affichées.",
+    "refresh": "Actualiser"
+  },
+  "alerts": { "heading": "Alertes météo" },
+  "air": { "heading": "Qualité de l'air" },
+  "sun": { "sunrise": "Lever", "sunset": "Coucher" },
+  "suggestions": {
+    "heading": "Suggestions du jour",
+    "tag": "IA d'activités",
+    "empty": "Pas de recommandation forte — profitez de la journée !"
+  },
+  "install": {
+    "pitch": "Installez Prévisions météo pour un accès rapide.",
+    "cta": "Installer"
+  },
+  "shortcuts": {
+    "title": "Raccourcis clavier",
+    "toggle": "Afficher cette boîte"
+  },
+  "a11y": {
+    "updated": "Prévisions mises à jour pour {{city}}. Actuellement {{temp}} degrés."
+  }
+}

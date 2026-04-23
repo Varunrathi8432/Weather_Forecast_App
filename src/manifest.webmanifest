@@ -1,0 +1,24 @@
+{
+  "name": "Weather Forecast",
+  "short_name": "Weather",
+  "theme_color": "#1976d2",
+  "background_color": "#0e1420",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "description": "Modern Angular weather forecast app with offline support, charts, and maps.",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

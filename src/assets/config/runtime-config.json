@@ -1,0 +1,16 @@
+{
+  "weatherApiBase": "https://api.open-meteo.com/v1",
+  "geocodingApiBase": "https://geocoding-api.open-meteo.com/v1",
+  "airQualityApiBase": "https://air-quality-api.open-meteo.com/v1",
+  "alertsApiBase": "https://api.weatherapi.com/v1",
+  "openWeatherMapKey": "",
+  "weatherApiComKey": "",
+  "vapidPublicKey": "",
+  "pushServerUrl": "",
+  "features": {
+    "pushNotifications": false,
+    "activityAI": true,
+    "airQuality": true,
+    "compare": true
+  }
+}

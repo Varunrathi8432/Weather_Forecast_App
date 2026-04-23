@@ -1,0 +1,90 @@
+.page { display: grid; gap: 1.25rem; }
+h1 { margin: 0 0 0.25rem; }
+
+.page-header p { margin: 0; color: var(--text-muted); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+
+  h2 { margin: 0 0 0.75rem; font-size: 1.05rem; }
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+
+  p { margin: 0.25rem 0 0; color: var(--text-muted); font-size: 0.9rem; }
+}
+
+.toggle {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+
+  &.active {
+    background: var(--primary);
+    color: var(--primary-contrast);
+    border-color: var(--primary);
+  }
+}
+
+.ghost {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.muted { color: var(--text-muted); margin: 0; }
+
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 0.05rem 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  button {
+    padding: 0.55rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface-alt);
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 500;
+
+    &.active {
+      background: var(--primary);
+      color: var(--primary-contrast);
+      border-color: var(--primary);
+    }
+
+    &:hover:not(.active),
+    &:focus-visible:not(.active) {
+      border-color: var(--primary);
+    }
+  }
+}

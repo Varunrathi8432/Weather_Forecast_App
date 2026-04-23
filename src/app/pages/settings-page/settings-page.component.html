@@ -1,0 +1,117 @@
+<div class="page">
+  <header class="page-header">
+    <h1>{{ 'settings.title' | translate }}</h1>
+    <p>{{ 'settings.subtitle' | translate }}</p>
+  </header>
+
+  <section class="card">
+    <h2>{{ 'settings.units' | translate }}</h2>
+    <div class="group" role="radiogroup" [attr.aria-label]="'settings.units' | translate">
+      <button
+        type="button"
+        role="radio"
+        [attr.aria-checked]="prefs.units() === 'metric'"
+        [class.active]="prefs.units() === 'metric'"
+        (click)="prefs.setUnits('metric')"
+      >
+        {{ 'settings.metric' | translate }} (°C / km/h / mm)
+      </button>
+      <button
+        type="button"
+        role="radio"
+        [attr.aria-checked]="prefs.units() === 'imperial'"
+        [class.active]="prefs.units() === 'imperial'"
+        (click)="prefs.setUnits('imperial')"
+      >
+        {{ 'settings.imperial' | translate }} (°F / mph / in)
+      </button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>{{ 'settings.theme' | translate }}</h2>
+    <div class="group" role="radiogroup" [attr.aria-label]="'settings.theme' | translate">
+      <button
+        type="button"
+        role="radio"
+        [attr.aria-checked]="theme.mode() === 'light'"
+        [class.active]="theme.mode() === 'light'"
+        (click)="theme.setMode('light')"
+      >
+        ☀️ {{ 'settings.light' | translate }}
+      </button>
+      <button
+        type="button"
+        role="radio"
+        [attr.aria-checked]="theme.mode() === 'dark'"
+        [class.active]="theme.mode() === 'dark'"
+        (click)="theme.setMode('dark')"
+      >
+        🌙 {{ 'settings.dark' | translate }}
+      </button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>{{ 'settings.language' | translate }}</h2>
+    <div class="group" role="radiogroup" [attr.aria-label]="'settings.language' | translate">
+      <button
+        type="button"
+        role="radio"
+        [attr.aria-checked]="prefs.language() === 'en'"
+        [class.active]="prefs.language() === 'en'"
+        (click)="prefs.setLanguage('en')"
+      >
+        English
+      </button>
+      <button
+        type="button"
+        role="radio"
+        [attr.aria-checked]="prefs.language() === 'es'"
+        [class.active]="prefs.language() === 'es'"
+        (click)="prefs.setLanguage('es')"
+      >
+        Español
+      </button>
+      <button
+        type="button"
+        role="radio"
+        [attr.aria-checked]="prefs.language() === 'fr'"
+        [class.active]="prefs.language() === 'fr'"
+        (click)="prefs.setLanguage('fr')"
+      >
+        Français
+      </button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>{{ 'settings.notifications' | translate }}</h2>
+    @if (config.feature('pushNotifications') && push.supported) {
+      <div class="row">
+        <div>
+          <strong>{{ 'settings.notificationsTitle' | translate }}</strong>
+          <p>{{ 'settings.notificationsBody' | translate }}</p>
+        </div>
+        <button
+          type="button"
+          class="toggle"
+          [class.active]="push.subscribed()"
+          [attr.aria-pressed]="push.subscribed()"
+          (click)="togglePush()"
+        >
+          {{ (push.subscribed() ? 'settings.notificationsOn' : 'settings.notificationsOff') | translate }}
+        </button>
+      </div>
+    } @else {
+      <p class="muted">{{ 'settings.notificationsUnavailable' | translate }}</p>
+    }
+  </section>
+
+  <section class="card">
+    <h2>{{ 'settings.keyboard' | translate }}</h2>
+    <button type="button" class="ghost" (click)="shortcuts.toggleHelp()">
+      {{ 'settings.showShortcuts' | translate }} (<kbd>?</kbd>)
+    </button>
+  </section>
+</div>

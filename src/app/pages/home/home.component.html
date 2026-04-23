@@ -1,0 +1,73 @@
+<div class="home">
+  <div class="toolbar">
+    <app-search class="search-box" />
+    <button
+      type="button"
+      class="icon-btn"
+      (click)="refresh()"
+      [disabled]="store.loading()"
+      [attr.aria-label]="'state.refresh' | translate"
+      [title]="'state.refresh' | translate"
+    >
+      <span aria-hidden="true" [class.spinning]="store.loading()">⟳</span>
+    </button>
+    <button
+      type="button"
+      class="unit-toggle"
+      (click)="toggleUnits()"
+      [attr.aria-label]="'settings.toggleUnits' | translate"
+    >
+      {{ prefs.units() === 'metric' ? '°C' : '°F' }}
+    </button>
+  </div>
+
+  @if (store.bundle(); as bundle) {
+    @if (bundle.alerts.length > 0) {
+      <app-alerts-banner [alerts]="bundle.alerts" />
+    }
+
+    <div class="primary">
+      <app-current-weather [current]="bundle.current" [location]="bundle.location" />
+    </div>
+
+    <div class="two-col">
+      <app-hourly-chart [hourly]="bundle.hourly" />
+      <div class="side-widgets" @listStagger>
+        <app-wind-compass
+          [direction]="bundle.current.windDirection"
+          [speed]="bundle.current.windSpeed"
+          [unitLabel]="prefs.units() === 'imperial' ? 'mph' : 'km/h'"
+        />
+        <app-sun-arc
+          [sunrise]="bundle.daily[0].sunrise"
+          [sunset]="bundle.daily[0].sunset"
+          [now]="bundle.current.time"
+        />
+      </div>
+    </div>
+
+    @if (bundle.airQuality || activitySuggestions().length > 0) {
+      <div class="two-col">
+        @if (bundle.airQuality) {
+          <app-air-quality-card [reading]="bundle.airQuality" @cardEnter />
+        }
+        @if (activitySuggestions().length > 0) {
+          <app-suggestions [items]="activitySuggestions()" @cardEnter />
+        }
+      </div>
+    }
+
+    <app-forecast [daily]="bundle.daily" />
+  } @else if (store.loading()) {
+    <div class="loading-state">
+      <app-skeleton-card />
+      <app-skeleton [height]="220" />
+      <app-skeleton [height]="160" />
+    </div>
+  } @else {
+    <div class="empty-state">
+      <h2>{{ 'state.welcomeTitle' | translate }}</h2>
+      <p>{{ 'state.welcomeBody' | translate }}</p>
+    </div>
+  }
+</div>

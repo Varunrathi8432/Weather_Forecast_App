@@ -1,0 +1,117 @@
+{
+  "app": {
+    "title": "Pronóstico del tiempo",
+    "footer": "Datos de Open-Meteo · Hecho con Angular"
+  },
+  "nav": {
+    "home": "Inicio",
+    "favorites": "Favoritos",
+    "compare": "Comparar",
+    "map": "Mapa",
+    "settings": "Ajustes",
+    "language": "Idioma",
+    "shortcuts": "atajos de teclado",
+    "theme": {
+      "light": "Cambiar a modo claro",
+      "dark": "Cambiar a modo oscuro"
+    }
+  },
+  "search": {
+    "label": "Buscar una ciudad",
+    "placeholder": "Buscar ciudad, pueblo o código postal…",
+    "locate": "Usar mi ubicación"
+  },
+  "current": {
+    "heading": "Condiciones actuales",
+    "feelsLike": "Sensación",
+    "humidity": "Humedad",
+    "wind": "Viento",
+    "gust": "ráfaga",
+    "pressure": "Presión",
+    "precipitation": "Precipitación",
+    "cloudCover": "Nubosidad",
+    "dewPoint": "Punto de rocío",
+    "share": "Compartir",
+    "copied": "Resumen copiado al portapapeles.",
+    "shareFailed": "No se pudo compartir el pronóstico."
+  },
+  "forecast": {
+    "heading": "Pronóstico de 7 días",
+    "today": "Hoy"
+  },
+  "hourly": {
+    "heading": "Próximas 24 horas",
+    "ariaLabel": "Gráfico horario de temperatura y precipitación"
+  },
+  "favorites": {
+    "title": "Ubicaciones favoritas",
+    "subtitle": "Tus lugares guardados, listos para consultar.",
+    "heading": "Favoritos",
+    "add": "Añadir a favoritos",
+    "remove": "Quitar de favoritos",
+    "removeItem": "Quitar {{name}}",
+    "empty": "Aún no has guardado favoritos.",
+    "hint": "Consejo: abre una ciudad desde"
+  },
+  "compare": {
+    "title": "Comparar ciudades",
+    "subtitle": "Añade hasta {{max}} ciudades para ver condiciones en paralelo.",
+    "add": "Añadir una ciudad",
+    "placeholder": "Buscar otra ciudad para comparar…",
+    "emptyTitle": "Aún no hay nada que comparar",
+    "emptyBody": "Añade una ciudad para comparar condiciones.",
+    "remove": "Quitar",
+    "clear": "Limpiar todo"
+  },
+  "map": {
+    "title": "Vista de mapa",
+    "subtitle": "Observa tu ubicación y favoritos en el mapa.",
+    "aria": "Mapa de ubicaciones favoritas y seleccionadas"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "subtitle": "Personaliza unidades, tema, idioma y alertas.",
+    "units": "Unidades",
+    "metric": "Métrico",
+    "imperial": "Imperial",
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "language": "Idioma",
+    "toggleUnits": "Cambiar unidades",
+    "notifications": "Notificaciones",
+    "notificationsTitle": "Alertas de tiempo severo",
+    "notificationsBody": "Recibe un aviso cuando haya condiciones severas en tus favoritos.",
+    "notificationsOn": "Activadas",
+    "notificationsOff": "Activar",
+    "notificationsUnavailable": "Las notificaciones push no están configuradas.",
+    "keyboard": "Atajos de teclado",
+    "showShortcuts": "Mostrar atajos"
+  },
+  "state": {
+    "loading": "Cargando el tiempo…",
+    "welcomeTitle": "¡Bienvenido!",
+    "welcomeBody": "Busca una ciudad o usa tu ubicación para ver el pronóstico.",
+    "offline": "Sin conexión — mostrando datos en caché.",
+    "refresh": "Actualizar"
+  },
+  "alerts": { "heading": "Avisos meteorológicos" },
+  "air": { "heading": "Calidad del aire" },
+  "sun": { "sunrise": "Amanecer", "sunset": "Atardecer" },
+  "suggestions": {
+    "heading": "Sugerencias de hoy",
+    "tag": "IA de actividades",
+    "empty": "Ninguna recomendación especial — ¡disfruta el día!"
+  },
+  "install": {
+    "pitch": "Instala Pronóstico del tiempo para acceso rápido.",
+    "cta": "Instalar"
+  },
+  "shortcuts": {
+    "title": "Atajos de teclado",
+    "toggle": "Mostrar este diálogo"
+  },
+  "a11y": {
+    "updated": "Pronóstico actualizado para {{city}}. Ahora {{temp}} grados."
+  }
+}
