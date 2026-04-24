@@ -1,24 +1,24 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, effect, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { WeatherStore } from '@app/core/weather-store';
-import { PreferencesService } from '@app/core/preferences.service';
-import { ConfigService } from '@app/core/config.service';
-import { SuggestionsService } from '@app/core/suggestions.service';
-import { AnnouncerService } from '@app/core/announcer.service';
-import { cardEnter, listStagger } from '@app/core/animations';
+import { WeatherStore } from '@core/stores/weather-store';
+import { PreferencesService } from '@core/services/preferences.service';
+import { ConfigService } from '@core/services/config.service';
+import { SuggestionsService } from '@core/services/suggestions.service';
+import { AnnouncerService } from '@core/services/announcer.service';
+import { cardEnter, listStagger } from '@core/animations/animations';
 
-import { SearchComponent } from '@app/components/search/search.component';
-import { CurrentWeatherComponent } from '@app/components/current-weather/current-weather.component';
-import { ForecastComponent } from '@app/components/forecast/forecast.component';
-import { HourlyChartComponent } from '@app/components/hourly-chart/hourly-chart.component';
-import { AirQualityCardComponent } from '@app/components/air-quality-card/air-quality-card.component';
-import { SuggestionsComponent } from '@app/components/suggestions/suggestions.component';
-import { WindCompassComponent } from '@app/components/wind-compass/wind-compass.component';
-import { SunArcComponent } from '@app/components/sun-arc/sun-arc.component';
-import { AlertsBannerComponent } from '@app/components/alerts-banner/alerts-banner.component';
-import { SkeletonCardComponent } from '@app/components/skeleton-card/skeleton-card.component';
-import { SkeletonComponent } from '@app/components/skeleton/skeleton.component';
+import { SearchComponent } from '@features/search/search/search.component';
+import { CurrentWeatherComponent } from '@features/weather/current-weather/current-weather.component';
+import { ForecastComponent } from '@features/weather/forecast/forecast.component';
+import { HourlyChartComponent } from '@features/weather/hourly-chart/hourly-chart.component';
+import { AirQualityCardComponent } from '@features/weather/air-quality-card/air-quality-card.component';
+import { SuggestionsComponent } from '@features/search/suggestions/suggestions.component';
+import { WindCompassComponent } from '@features/weather/wind-compass/wind-compass.component';
+import { SunArcComponent } from '@features/weather/sun-arc/sun-arc.component';
+import { AlertsBannerComponent } from '@features/weather/alerts-banner/alerts-banner.component';
+import { SkeletonCardComponent } from '@shared/components/skeleton-card/skeleton-card.component';
+import { SkeletonComponent } from '@shared/components/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-home',

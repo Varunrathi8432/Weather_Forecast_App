@@ -1,4 +1,10 @@
-<a class="skip-link" href="#main">Skip to content</a>
+<div
+  class="top-progress"
+  role="progressbar"
+  aria-label="Loading"
+  [class.active]="loading.pending()"
+  [attr.aria-hidden]="!loading.pending()"
+></div>
 
 <header class="app-header" role="banner">
   <div class="header-inner">
@@ -18,17 +24,13 @@
     </nav>
 
     <div class="header-actions">
-      <label class="visually-hidden" for="lang-select">{{ 'nav.language' | translate }}</label>
-      <select
-        id="lang-select"
+      <app-select
         class="lang-select"
+        [options]="languageOptions"
         [value]="prefs.language()"
-        (change)="selectLanguage($event)"
-      >
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-      </select>
+        (valueChange)="prefs.setLanguage($event)"
+        [ariaLabel]="'nav.language' | translate"
+      />
 
       <button
         type="button"
@@ -57,7 +59,3 @@
 <app-error-toast />
 <app-offline-banner />
 <app-shortcut-help />
-
-<div class="install-slot">
-  <app-install-banner />
-</div>

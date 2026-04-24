@@ -18,8 +18,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { routes } from './app.routes';
-import { errorInterceptor } from './core/error.interceptor';
-import { ConfigService } from './core/config.service';
+import { errorInterceptor } from '@core/interceptors/error.interceptor';
+import { loadingInterceptor } from '@core/interceptors/loading.interceptor';
+import { ConfigService } from '@core/services/config.service';
 
 export function httpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,7 +35,7 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
     ),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch(), withInterceptors([errorInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([loadingInterceptor, errorInterceptor])),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',

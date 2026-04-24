@@ -79,7 +79,7 @@ export interface WeatherBundle {
 
 export type Units = 'metric' | 'imperial';
 export type ThemeMode = 'light' | 'dark';
-export type Language = 'en' | 'es' | 'fr';
+export type Language = 'en' | 'es' | 'fr' | 'hi';
 
 export type ActivityCategory = 'outdoor' | 'fitness' | 'travel' | 'health' | 'wardrobe';
 

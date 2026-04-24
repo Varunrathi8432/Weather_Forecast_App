@@ -21,8 +21,8 @@ L.Icon.Default.mergeOptions({
   iconUrl: `${iconBase}/marker-icon.png`,
   shadowUrl: `${iconBase}/marker-shadow.png`,
 });
-import { WeatherStore } from '@app/core/weather-store';
-import { PreferencesService } from '@app/core/preferences.service';
+import { WeatherStore } from '@core/stores/weather-store';
+import { PreferencesService } from '@core/services/preferences.service';
 
 @Component({
   selector: 'app-map-page',
@@ -40,15 +40,20 @@ import { PreferencesService } from '@app/core/preferences.service';
   styles: [
     `
       .page { display: grid; gap: 1rem; }
-      h1 { margin: 0; }
+      h1 { margin: 0; font-size: clamp(1.25rem, 4vw, 1.75rem); }
       .page-header p { margin: 0.25rem 0 0; color: var(--text-muted); }
       .map {
         width: 100%;
-        height: 70vh;
-        min-height: 420px;
+        height: clamp(320px, 65vh, 640px);
         border-radius: 14px;
         overflow: hidden;
         border: 1px solid var(--border);
+      }
+      @media (max-width: 600px) {
+        .map {
+          height: clamp(280px, 60vh, 480px);
+          border-radius: 12px;
+        }
       }
     `,
   ],

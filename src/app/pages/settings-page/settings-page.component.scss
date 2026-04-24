@@ -1,5 +1,5 @@
 .page { display: grid; gap: 1.25rem; }
-h1 { margin: 0 0 0.25rem; }
+h1 { margin: 0 0 0.25rem; font-size: clamp(1.25rem, 4vw, 1.75rem); }
 
 .page-header p { margin: 0; color: var(--text-muted); }
 
@@ -17,9 +17,12 @@ h1 { margin: 0 0 0.25rem; }
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   p { margin: 0.25rem 0 0; color: var(--text-muted); font-size: 0.9rem; }
 }
+
+.row > div { min-width: 0; flex: 1 1 200px; }
 
 .toggle {
   padding: 0.5rem 1rem;
@@ -29,6 +32,7 @@ h1 { margin: 0 0 0.25rem; }
   color: var(--text);
   cursor: pointer;
   font-weight: 600;
+  min-height: 44px;
 
   &.active {
     background: var(--primary);
@@ -47,6 +51,8 @@ h1 { margin: 0 0 0.25rem; }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  min-height: 44px;
+  flex-wrap: wrap;
 }
 
 .muted { color: var(--text-muted); margin: 0; }
@@ -75,6 +81,9 @@ kbd {
     color: var(--text);
     cursor: pointer;
     font-weight: 500;
+    min-height: 44px;
+    flex: 1 1 auto;
+    min-width: 0;
 
     &.active {
       background: var(--primary);
@@ -87,4 +96,20 @@ kbd {
       border-color: var(--primary);
     }
   }
+}
+
+@media (max-width: 600px) {
+  .page { gap: 1rem; }
+  .card {
+    padding: 0.85rem 1rem;
+  }
+  .group button {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .row { gap: 0.75rem; }
+  .toggle, .ghost { width: 100%; justify-content: center; }
 }

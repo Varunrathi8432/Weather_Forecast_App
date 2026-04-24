@@ -3,12 +3,12 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subject, debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs';
 
-import { CompareStore } from '@app/core/compare-store';
-import { GeoService } from '@app/core/geo.service';
-import { GeoLocation } from '@app/core/models/weather.model';
-import { CompareCardComponent } from '@app/components/compare-card/compare-card.component';
-import { SkeletonCardComponent } from '@app/components/skeleton-card/skeleton-card.component';
-import { listStagger } from '@app/core/animations';
+import { CompareStore } from '@core/stores/compare-store';
+import { GeoService } from '@core/services/geo.service';
+import { GeoLocation } from '@core/models/weather.model';
+import { CompareCardComponent } from '@features/compare/compare-card/compare-card.component';
+import { SkeletonCardComponent } from '@shared/components/skeleton-card/skeleton-card.component';
+import { listStagger } from '@core/animations/animations';
 
 @Component({
   selector: 'app-compare-page',

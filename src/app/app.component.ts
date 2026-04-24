@@ -2,14 +2,16 @@ import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/cor
 import { ChildrenOutletContexts, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { ThemeService } from './core/theme.service';
-import { PreferencesService } from './core/preferences.service';
-import { ErrorToastComponent } from './components/error-toast/error-toast.component';
-import { OfflineBannerComponent } from './components/offline-banner/offline-banner.component';
-import { InstallBannerComponent } from './components/install-banner/install-banner.component';
-import { ShortcutHelpComponent } from './components/shortcut-help/shortcut-help.component';
-import { ShortcutsService } from './core/shortcuts.service';
-import { routeFade } from './core/animations';
+import { ThemeService } from '@core/services/theme.service';
+import { PreferencesService } from '@core/services/preferences.service';
+import { LoadingService } from '@core/services/loading.service';
+import { ErrorToastComponent } from '@shared/components/error-toast/error-toast.component';
+import { OfflineBannerComponent } from '@shared/components/offline-banner/offline-banner.component';
+import { ShortcutHelpComponent } from '@features/shortcuts/shortcut-help/shortcut-help.component';
+import { ShortcutsService } from '@core/services/shortcuts.service';
+import { routeFade } from '@core/animations/animations';
+import { AppSelectComponent, AppSelectOption } from '@shared/components/app-select/app-select.component';
+import { Language } from '@core/models/weather.model';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +21,9 @@ import { routeFade } from './core/animations';
     RouterLink,
     RouterLinkActive,
     TranslateModule,
+    AppSelectComponent,
     ErrorToastComponent,
     OfflineBannerComponent,
-    InstallBannerComponent,
     ShortcutHelpComponent,
   ],
   animations: [routeFade],
@@ -35,9 +37,17 @@ export class AppComponent {
   private readonly shortcuts = inject(ShortcutsService);
   protected readonly theme = inject(ThemeService);
   protected readonly prefs = inject(PreferencesService);
+  protected readonly loading = inject(LoadingService);
+
+  protected readonly languageOptions: AppSelectOption<Language>[] = [
+    { value: 'en', label: 'English' },
+    { value: 'es', label: 'Español' },
+    { value: 'fr', label: 'Français' },
+    { value: 'hi', label: 'हिन्दी' },
+  ];
 
   constructor() {
-    this.translate.addLangs(['en', 'es', 'fr']);
+    this.translate.addLangs(['en', 'es', 'fr', 'hi']);
     this.translate.use(this.prefs.language());
     effect(() => {
       const lang = this.prefs.language();
@@ -59,10 +69,5 @@ export class AppComponent {
 
   toggleTheme(): void {
     this.theme.toggle();
-  }
-
-  selectLanguage(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value as 'en' | 'es' | 'fr';
-    this.prefs.setLanguage(value);
   }
 }

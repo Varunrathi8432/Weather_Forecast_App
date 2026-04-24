@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { PreferencesService } from '@app/core/preferences.service';
-import { ThemeService } from '@app/core/theme.service';
-import { PushNotificationsService } from '@app/core/push-notifications.service';
-import { ConfigService } from '@app/core/config.service';
-import { ShortcutsService } from '@app/core/shortcuts.service';
+import { PreferencesService } from '@core/services/preferences.service';
+import { ThemeService } from '@core/services/theme.service';
+import { PushNotificationsService } from '@core/services/push-notifications.service';
+import { ConfigService } from '@core/services/config.service';
+import { ShortcutsService } from '@core/services/shortcuts.service';
 
 @Component({
   selector: 'app-settings-page',

@@ -1,5 +1,5 @@
 .page { display: grid; gap: 1.25rem; }
-h1 { margin: 0 0 0.25rem; }
+h1 { margin: 0 0 0.25rem; font-size: clamp(1.25rem, 4vw, 1.75rem); }
 .page-header p { margin: 0; color: var(--text-muted); }
 
 .search {
@@ -37,6 +37,8 @@ h1 { margin: 0 0 0.25rem; }
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   z-index: 5;
+  max-height: 60vh;
+  overflow: auto;
 }
 .suggestions li button {
   width: 100%;
@@ -50,17 +52,18 @@ h1 { margin: 0 0 0.25rem; }
   cursor: pointer;
   color: var(--text);
   text-align: left;
+  flex-wrap: wrap;
 }
 .suggestions li button:hover,
 .suggestions li button:focus-visible {
   background: var(--surface-alt);
 }
-.suggestions strong { font-weight: 600; }
-.suggestions span { color: var(--text-muted); font-size: 0.85rem; }
+.suggestions strong { font-weight: 600; word-break: break-word; }
+.suggestions span { color: var(--text-muted); font-size: 0.85rem; word-break: break-word; }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
 }
 
@@ -68,7 +71,7 @@ h1 { margin: 0 0 0.25rem; }
   background: var(--surface);
   border: 1px dashed var(--border);
   border-radius: 14px;
-  padding: 2rem;
+  padding: 2rem 1.25rem;
   text-align: center;
 }
 
@@ -83,8 +86,18 @@ h1 { margin: 0 0 0.25rem; }
   padding: 0.5rem 1rem;
   border-radius: 10px;
   cursor: pointer;
+  min-height: 44px;
 }
 .clear:hover, .clear:focus-visible {
   color: var(--danger);
   border-color: var(--danger);
+}
+
+@media (max-width: 600px) {
+  .page { gap: 1rem; }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .empty { padding: 1.5rem 1rem; }
 }

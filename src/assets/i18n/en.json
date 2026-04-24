@@ -110,10 +110,6 @@
     "tag": "Activity AI",
     "empty": "No strong recommendations — enjoy the day!"
   },
-  "install": {
-    "pitch": "Install Weather Forecast for one-tap access.",
-    "cta": "Install"
-  },
   "shortcuts": {
     "title": "Keyboard shortcuts",
     "toggle": "Show this dialog"

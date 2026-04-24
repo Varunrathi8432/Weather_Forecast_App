@@ -103,10 +103,6 @@
     "tag": "IA d'activités",
     "empty": "Pas de recommandation forte — profitez de la journée !"
   },
-  "install": {
-    "pitch": "Installez Prévisions météo pour un accès rapide.",
-    "cta": "Installer"
-  },
   "shortcuts": {
     "title": "Raccourcis clavier",
     "toggle": "Afficher cette boîte"

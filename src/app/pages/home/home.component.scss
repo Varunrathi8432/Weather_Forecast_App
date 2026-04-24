@@ -4,9 +4,13 @@
   display: flex;
   gap: 0.5rem;
   align-items: stretch;
+  flex-wrap: wrap;
 }
 
-.search-box { flex: 1; }
+.search-box {
+  flex: 1 1 200px;
+  min-width: 0;
+}
 
 .icon-btn,
 .unit-toggle {
@@ -18,6 +22,7 @@
   cursor: pointer;
   font-weight: 700;
   min-width: 3rem;
+  min-height: 44px;
 
   &:hover:not(:disabled),
   &:focus-visible {
@@ -64,9 +69,24 @@
   background: var(--surface);
   border: 1px dashed var(--border);
   border-radius: 14px;
-  padding: 2rem;
+  padding: 2rem 1.25rem;
   text-align: center;
 
-  h2 { margin: 0 0 0.5rem; }
+  h2 { margin: 0 0 0.5rem; font-size: clamp(1.1rem, 3vw, 1.3rem); }
   p { margin: 0; color: var(--text-muted); }
+}
+
+@media (max-width: 600px) {
+  .home { gap: 1rem; }
+  .side-widgets { gap: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  .toolbar { gap: 0.4rem; }
+  .icon-btn,
+  .unit-toggle {
+    padding: 0 0.75rem;
+    min-width: 2.75rem;
+  }
+  .empty-state { padding: 1.5rem 1rem; }
 }

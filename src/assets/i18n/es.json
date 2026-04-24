@@ -103,10 +103,6 @@
     "tag": "IA de actividades",
     "empty": "Ninguna recomendación especial — ¡disfruta el día!"
   },
-  "install": {
-    "pitch": "Instala Pronóstico del tiempo para acceso rápido.",
-    "cta": "Instalar"
-  },
   "shortcuts": {
     "title": "Atajos de teclado",
     "toggle": "Mostrar este diálogo"

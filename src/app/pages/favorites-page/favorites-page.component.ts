@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 
-import { FavoritesListComponent } from '@app/components/favorites-list/favorites-list.component';
+import { FavoritesListComponent } from '@features/favorites/favorites-list/favorites-list.component';
 
 @Component({
   selector: 'app-favorites-page',
@@ -24,7 +24,7 @@ import { FavoritesListComponent } from '@app/components/favorites-list/favorites
   styles: [
     `
       .page { display: grid; gap: 1rem; }
-      h1 { margin: 0 0 0.25rem; }
+      h1 { margin: 0 0 0.25rem; font-size: clamp(1.25rem, 4vw, 1.75rem); }
       p { margin: 0; color: var(--text-muted); }
       .hint a { color: var(--primary); text-decoration: none; font-weight: 600; }
     `,

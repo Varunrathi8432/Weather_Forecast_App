@@ -2,28 +2,43 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0.5rem;
-  padding: 0.5rem 0.85rem;
-  background: var(--primary);
-  color: var(--primary-contrast);
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  z-index: 200;
-}
-.skip-link:focus { top: 0.5rem; }
+.top-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1000;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 150ms ease;
 
-.install-slot {
-  max-width: 1200px;
-  margin: 0 auto 1rem;
-  padding: 0 1rem;
-  display: flex;
-  justify-content: flex-end;
+  &.active {
+    opacity: 1;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 40%;
+    background: var(--primary);
+    border-radius: 0 3px 3px 0;
+    animation: top-progress-slide 1.1s ease-in-out infinite;
+  }
+}
+
+@keyframes top-progress-slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-progress::before { animation: none; width: 100%; opacity: 0.6; }
 }
 
 kbd {
@@ -64,13 +79,20 @@ kbd {
   font-size: 1.1rem;
   text-decoration: none;
   color: var(--text);
+  min-width: 0;
+}
+
+.brand-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .brand-icon { font-size: 1.4rem; }
 
 .main-nav {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.35rem;
   justify-content: center;
   flex-wrap: wrap;
 
@@ -81,6 +103,7 @@ kbd {
     color: var(--text-muted);
     font-weight: 500;
     transition: background 120ms ease, color 120ms ease;
+    white-space: nowrap;
 
     &:hover,
     &:focus-visible {
@@ -99,15 +122,13 @@ kbd {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .lang-select {
-  padding: 0.4rem 0.6rem;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface-alt);
-  color: var(--text);
-  font-size: 0.9rem;
+  width: 7.5rem;
+  max-width: 7.5rem;
+  flex-shrink: 0;
 }
 
 .icon-btn {
@@ -121,6 +142,7 @@ kbd {
   cursor: pointer;
   font-size: 1.05rem;
   color: var(--text);
+  flex-shrink: 0;
 
   &:hover,
   &:focus-visible {
@@ -146,13 +168,61 @@ kbd {
   background: var(--surface);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .header-inner {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto auto;
     grid-template-rows: auto auto;
+    gap: 0.5rem 0.75rem;
+    padding: 0.6rem 0.85rem;
   }
   .main-nav {
     grid-column: 1 / -1;
+    grid-row: 2;
     order: 3;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    margin: 0 -0.85rem;
+    padding: 0.25rem 0.85rem 0.35rem;
+
+    &::-webkit-scrollbar { height: 3px; }
+    &::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    a { padding: 0.4rem 0.9rem; flex-shrink: 0; }
+  }
+  .header-actions {
+    justify-self: end;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner {
+    padding: 0.55rem 0.75rem;
+  }
+  .brand { font-size: 1rem; }
+  .brand-icon { font-size: 1.25rem; }
+  .lang-select {
+    width: 6rem;
+    max-width: 6rem;
+  }
+  .icon-btn {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.95rem;
+  }
+  .app-main {
+    padding: 1rem 0.75rem 2.5rem;
+  }
+  .main-nav {
+    margin: 0 -0.75rem;
+    padding: 0.25rem 0.75rem 0.35rem;
+    a { padding: 0.35rem 0.75rem; font-size: 0.9rem; }
+  }
+  .app-footer {
+    padding: 0.85rem 0.75rem;
+    font-size: 0.8rem;
   }
 }
