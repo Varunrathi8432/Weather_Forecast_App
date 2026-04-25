@@ -40,6 +40,9 @@ Thumbs.db
 /cypress/videos
 /cypress/screenshots
 
-# Env
+# Env — never commit real secrets
 .env
 .env.local
+.env.development.local
+.env.production.local
+# .env.development and .env.production are templates (no real keys) — safe to commit
