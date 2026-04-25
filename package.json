@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node scripts/set-env.js && ng serve --port=4200",
+    "start": "ng serve --port=4200",
     "build": "node scripts/set-env.js && ng build",
     "build:prod": "NODE_ENV=production node scripts/set-env.js && ng build --configuration production",
     "watch": "ng build --watch --configuration development",
