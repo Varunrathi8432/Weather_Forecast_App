@@ -29,7 +29,9 @@ describe('CompareStore', () => {
 
   afterEach(() => {
     // Drain any outstanding requests to keep tests clean.
-    httpMock.match(() => true).forEach((r) => r.flush({}, { status: 500, statusText: 'test' }));
+    httpMock.match(() => true).forEach((r) => {
+      if (!r.cancelled) r.flush({}, { status: 500, statusText: 'test' });
+    });
     httpMock.verify();
   });
 
