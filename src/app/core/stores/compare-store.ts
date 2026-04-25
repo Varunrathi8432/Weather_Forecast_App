@@ -1,5 +1,6 @@
 import { Injectable, computed, effect, inject, signal, untracked } from '@angular/core';
 import { catchError, EMPTY, finalize } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 import { GeoLocation, WeatherBundle } from '@core/models/weather.model';
 import { PreferencesService } from '@core/services/preferences.service';
@@ -24,6 +25,7 @@ export class CompareStore {
   private readonly weather = inject(WeatherService);
   private readonly prefs = inject(PreferencesService);
   private readonly errors = inject(ErrorService);
+  private readonly translate = inject(TranslateService);
 
   private readonly _cities = signal<GeoLocation[]>(readJson<GeoLocation[]>(KEY_CITIES, []));
   private readonly _bundles = signal<Record<number, WeatherBundle>>(
@@ -57,7 +59,7 @@ export class CompareStore {
   add(city: GeoLocation): void {
     if (this._cities().some((c) => c.id === city.id)) return;
     if (this._cities().length >= MAX_CITIES) {
-      this.errors.push(`You can compare up to ${MAX_CITIES} cities at once.`);
+      this.errors.push(this.translate.instant('compare.maxReached', { max: MAX_CITIES }));
       return;
     }
     this._cities.update((list) => [...list, city]);

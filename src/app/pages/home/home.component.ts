@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, effect, inject } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { WeatherStore } from '@core/stores/weather-store';
 import { PreferencesService } from '@core/services/preferences.service';
 import { ConfigService } from '@core/services/config.service';
 import { SuggestionsService } from '@core/services/suggestions.service';
-import { AnnouncerService } from '@core/services/announcer.service';
 import { cardEnter, listStagger } from '@core/animations/animations';
 
 import { SearchComponent } from '@features/search/search/search.component';
@@ -47,8 +46,6 @@ export class HomeComponent implements OnInit {
   protected readonly prefs = inject(PreferencesService);
   protected readonly config = inject(ConfigService);
   private readonly suggestions = inject(SuggestionsService);
-  private readonly announcer = inject(AnnouncerService);
-  private readonly translate = inject(TranslateService);
 
   readonly activitySuggestions = computed(() => {
     if (!this.config.feature('activityAI')) return [];
@@ -62,18 +59,6 @@ export class HomeComponent implements OnInit {
       units: this.prefs.units(),
     });
   });
-
-  constructor() {
-    effect(() => {
-      const bundle = this.store.bundle();
-      if (!bundle) return;
-      const msg = this.translate.instant('a11y.updated', {
-        city: bundle.location.name,
-        temp: Math.round(bundle.current.temperature),
-      });
-      this.announcer.announce(msg);
-    });
-  }
 
   ngOnInit(): void {
     if (!this.store.hasData() && !this.store.selected()) {

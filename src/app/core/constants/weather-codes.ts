@@ -1,39 +1,40 @@
 export interface WeatherCodeInfo {
-  label: string;
+  /** Translation key for the weather condition label. */
+  labelKey: string;
   icon: string;
 }
 
 const TABLE: Record<number, WeatherCodeInfo> = {
-  0: { label: 'Clear sky', icon: '☀️' },
-  1: { label: 'Mainly clear', icon: '🌤️' },
-  2: { label: 'Partly cloudy', icon: '⛅' },
-  3: { label: 'Overcast', icon: '☁️' },
-  45: { label: 'Fog', icon: '🌫️' },
-  48: { label: 'Depositing rime fog', icon: '🌫️' },
-  51: { label: 'Light drizzle', icon: '🌦️' },
-  53: { label: 'Drizzle', icon: '🌦️' },
-  55: { label: 'Dense drizzle', icon: '🌧️' },
-  56: { label: 'Freezing drizzle', icon: '🌧️' },
-  57: { label: 'Dense freezing drizzle', icon: '🌧️' },
-  61: { label: 'Light rain', icon: '🌦️' },
-  63: { label: 'Rain', icon: '🌧️' },
-  65: { label: 'Heavy rain', icon: '🌧️' },
-  66: { label: 'Freezing rain', icon: '🌧️' },
-  67: { label: 'Heavy freezing rain', icon: '🌧️' },
-  71: { label: 'Light snow', icon: '🌨️' },
-  73: { label: 'Snow', icon: '🌨️' },
-  75: { label: 'Heavy snow', icon: '❄️' },
-  77: { label: 'Snow grains', icon: '❄️' },
-  80: { label: 'Light rain showers', icon: '🌦️' },
-  81: { label: 'Rain showers', icon: '🌧️' },
-  82: { label: 'Violent rain showers', icon: '⛈️' },
-  85: { label: 'Snow showers', icon: '🌨️' },
-  86: { label: 'Heavy snow showers', icon: '❄️' },
-  95: { label: 'Thunderstorm', icon: '⛈️' },
-  96: { label: 'Thunderstorm with hail', icon: '⛈️' },
-  99: { label: 'Severe thunderstorm', icon: '⛈️' },
+  0: { labelKey: 'weatherCodes.0', icon: '☀️' },
+  1: { labelKey: 'weatherCodes.1', icon: '🌤️' },
+  2: { labelKey: 'weatherCodes.2', icon: '⛅' },
+  3: { labelKey: 'weatherCodes.3', icon: '☁️' },
+  45: { labelKey: 'weatherCodes.45', icon: '🌫️' },
+  48: { labelKey: 'weatherCodes.48', icon: '🌫️' },
+  51: { labelKey: 'weatherCodes.51', icon: '🌦️' },
+  53: { labelKey: 'weatherCodes.53', icon: '🌦️' },
+  55: { labelKey: 'weatherCodes.55', icon: '🌧️' },
+  56: { labelKey: 'weatherCodes.56', icon: '🌧️' },
+  57: { labelKey: 'weatherCodes.57', icon: '🌧️' },
+  61: { labelKey: 'weatherCodes.61', icon: '🌦️' },
+  63: { labelKey: 'weatherCodes.63', icon: '🌧️' },
+  65: { labelKey: 'weatherCodes.65', icon: '🌧️' },
+  66: { labelKey: 'weatherCodes.66', icon: '🌧️' },
+  67: { labelKey: 'weatherCodes.67', icon: '🌧️' },
+  71: { labelKey: 'weatherCodes.71', icon: '🌨️' },
+  73: { labelKey: 'weatherCodes.73', icon: '🌨️' },
+  75: { labelKey: 'weatherCodes.75', icon: '❄️' },
+  77: { labelKey: 'weatherCodes.77', icon: '❄️' },
+  80: { labelKey: 'weatherCodes.80', icon: '🌦️' },
+  81: { labelKey: 'weatherCodes.81', icon: '🌧️' },
+  82: { labelKey: 'weatherCodes.82', icon: '⛈️' },
+  85: { labelKey: 'weatherCodes.85', icon: '🌨️' },
+  86: { labelKey: 'weatherCodes.86', icon: '❄️' },
+  95: { labelKey: 'weatherCodes.95', icon: '⛈️' },
+  96: { labelKey: 'weatherCodes.96', icon: '⛈️' },
+  99: { labelKey: 'weatherCodes.99', icon: '⛈️' },
 };
 
 export function describeWeatherCode(code: number): WeatherCodeInfo {
-  return TABLE[code] ?? { label: 'Unknown', icon: '❓' };
+  return TABLE[code] ?? { labelKey: 'weatherCodes.unknown', icon: '❓' };
 }

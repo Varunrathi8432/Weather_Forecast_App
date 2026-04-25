@@ -62,7 +62,7 @@
         [class.active]="prefs.language() === 'en'"
         (click)="prefs.setLanguage('en')"
       >
-        English
+        {{ 'languages.en' | translate }}
       </button>
       <button
         type="button"
@@ -71,7 +71,7 @@
         [class.active]="prefs.language() === 'es'"
         (click)="prefs.setLanguage('es')"
       >
-        Español
+        {{ 'languages.es' | translate }}
       </button>
       <button
         type="button"
@@ -80,7 +80,16 @@
         [class.active]="prefs.language() === 'fr'"
         (click)="prefs.setLanguage('fr')"
       >
-        Français
+        {{ 'languages.fr' | translate }}
+      </button>
+      <button
+        type="button"
+        role="radio"
+        [attr.aria-checked]="prefs.language() === 'hi'"
+        [class.active]="prefs.language() === 'hi'"
+        (click)="prefs.setLanguage('hi')"
+      >
+        {{ 'languages.hi' | translate }}
       </button>
     </div>
   </section>

@@ -151,8 +151,9 @@ export class WeatherService {
       alerts.push({
         id: 'wind',
         severity: 'warning',
-        title: 'High wind gusts',
-        description: `Gusts near ${Math.round(current.windGusts)} — secure loose outdoor items.`,
+        titleKey: 'alerts.wind.title',
+        descriptionKey: 'alerts.wind.description',
+        params: { gusts: Math.round(current.windGusts) },
         effective: current.time,
         expires: daily[0]?.date ?? current.time,
       });
@@ -163,8 +164,9 @@ export class WeatherService {
       alerts.push({
         id: 'rain',
         severity: 'advisory',
-        title: 'Heavy precipitation likely',
-        description: `Precipitation probability up to ${maxPop}% in the next 48h.`,
+        titleKey: 'alerts.rain.title',
+        descriptionKey: 'alerts.rain.description',
+        params: { maxPop },
         effective: current.time,
         expires: daily[1]?.date ?? current.time,
       });
@@ -174,8 +176,9 @@ export class WeatherService {
       alerts.push({
         id: 'uv',
         severity: 'advisory',
-        title: 'Very high UV index',
-        description: `Peak UV of ${daily[0].uvIndexMax.toFixed(1)}. Use sunscreen and limit midday exposure.`,
+        titleKey: 'alerts.uv.title',
+        descriptionKey: 'alerts.uv.description',
+        params: { uv: daily[0].uvIndexMax.toFixed(1) },
         effective: daily[0].date,
         expires: daily[0].date,
       });
@@ -185,8 +188,9 @@ export class WeatherService {
       alerts.push({
         id: 'aqi',
         severity: air.europeanAqi >= 100 ? 'warning' : 'advisory',
-        title: 'Reduced air quality',
-        description: `European AQI ${Math.round(air.europeanAqi)}. Sensitive groups should limit outdoor activity.`,
+        titleKey: 'alerts.aqi.title',
+        descriptionKey: 'alerts.aqi.description',
+        params: { aqi: Math.round(air.europeanAqi) },
         effective: air.time,
         expires: air.time,
       });

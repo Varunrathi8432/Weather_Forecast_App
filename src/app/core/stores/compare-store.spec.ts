@@ -4,6 +4,7 @@ import {
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { CompareStore } from './compare-store';
 import { ConfigService } from '@core/services/config.service';
@@ -19,6 +20,7 @@ describe('CompareStore', () => {
   beforeEach(() => {
     localStorage.clear();
     TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot()],
       providers: [provideHttpClient(), provideHttpClientTesting(), ConfigService, CompareStore],
     });
     store = TestBed.inject(CompareStore);

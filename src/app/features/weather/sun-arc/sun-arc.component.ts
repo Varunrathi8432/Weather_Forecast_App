@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-sun-arc',
@@ -69,6 +70,9 @@ import { TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SunArcComponent {
+  private readonly translate = inject(TranslateService);
+  private readonly langTick = toSignal(this.translate.onLangChange);
+
   readonly sunrise = input.required<string>();
   readonly sunset = input.required<string>();
   readonly now = input<string>(new Date().toISOString());
@@ -91,7 +95,12 @@ export class SunArcComponent {
   readonly trailPath = computed(() => `M 10 100 Q 100 10 ${this.sunX()} ${this.sunY()} L ${this.sunX()} 100 Z`);
 
   readonly ariaLabel = computed(() => {
+    this.langTick();
     const pct = Math.round(this.progress() * 100);
-    return `Daylight progress ${pct}%. Sunrise ${this.sunrise()}, sunset ${this.sunset()}.`;
+    return this.translate.instant('sun.aria', {
+      pct,
+      sunrise: this.sunrise(),
+      sunset: this.sunset(),
+    });
   });
 }

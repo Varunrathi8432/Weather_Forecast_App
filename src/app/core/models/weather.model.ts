@@ -61,8 +61,12 @@ export interface AirQualityReading {
 export interface WeatherAlert {
   id: string;
   severity: 'info' | 'advisory' | 'watch' | 'warning';
-  title: string;
-  description: string;
+  /** Translation key for the alert title. */
+  titleKey: string;
+  /** Translation key for the alert description. */
+  descriptionKey: string;
+  /** Interpolation params passed to the translate pipe for descriptionKey. */
+  params?: Record<string, string | number>;
   effective: string;
   expires: string;
 }
@@ -86,8 +90,12 @@ export type ActivityCategory = 'outdoor' | 'fitness' | 'travel' | 'health' | 'wa
 export interface ActivitySuggestion {
   id: string;
   category: ActivityCategory;
-  title: string;
-  rationale: string;
+  /** Translation key for the suggestion title. */
+  titleKey: string;
+  /** Translation key for the suggestion rationale. */
+  rationaleKey: string;
+  /** Interpolation params for the rationale translation. */
+  rationaleParams?: Record<string, string | number>;
   score: number;
   icon: string;
 }

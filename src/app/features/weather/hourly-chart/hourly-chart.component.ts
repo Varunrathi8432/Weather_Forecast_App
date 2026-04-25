@@ -10,7 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { HourlyForecastEntry } from '@core/models/weather.model';
 import { PreferencesService } from '@core/services/preferences.service';
@@ -55,6 +55,7 @@ Chart.register(...registerables);
 })
 export class HourlyChartComponent implements AfterViewInit, OnDestroy {
   private readonly prefs = inject(PreferencesService);
+  private readonly translate = inject(TranslateService);
   readonly hourly = input.required<HourlyForecastEntry[]>();
   readonly canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
 
@@ -65,6 +66,19 @@ export class HourlyChartComponent implements AfterViewInit, OnDestroy {
       const data = this.hourly();
       if (this.chart) this.updateChart(data);
     });
+    this.translate.onLangChange.subscribe(() => {
+      if (this.chart) this.updateChart(this.hourly());
+    });
+  }
+
+  private tempLabel(): string {
+    return this.translate.instant('hourly.tempLabel', {
+      unit: this.prefs.units() === 'imperial' ? '°F' : '°C',
+    });
+  }
+
+  private precipLabel(): string {
+    return this.translate.instant('hourly.precipLabel');
   }
 
   ngAfterViewInit(): void {
@@ -82,7 +96,7 @@ export class HourlyChartComponent implements AfterViewInit, OnDestroy {
         labels: data.map((h) => new Date(h.time).getHours() + 'h'),
         datasets: [
           {
-            label: `Temp (${this.prefs.units() === 'imperial' ? '°F' : '°C'})`,
+            label: this.tempLabel(),
             data: data.map((h) => h.temperature),
             borderColor: '#1976d2',
             backgroundColor: 'rgba(25, 118, 210, 0.2)',
@@ -91,7 +105,7 @@ export class HourlyChartComponent implements AfterViewInit, OnDestroy {
             yAxisID: 'y',
           },
           {
-            label: 'Precip (%)',
+            label: this.precipLabel(),
             data: data.map((h) => h.precipitationProbability),
             borderColor: '#26a69a',
             backgroundColor: 'rgba(38, 166, 154, 0.15)',
@@ -127,8 +141,9 @@ export class HourlyChartComponent implements AfterViewInit, OnDestroy {
     if (!this.chart) return;
     this.chart.data.labels = data.map((h) => new Date(h.time).getHours() + 'h');
     this.chart.data.datasets[0].data = data.map((h) => h.temperature);
-    this.chart.data.datasets[0].label = `Temp (${this.prefs.units() === 'imperial' ? '°F' : '°C'})`;
+    this.chart.data.datasets[0].label = this.tempLabel();
     this.chart.data.datasets[1].data = data.map((h) => h.precipitationProbability);
+    this.chart.data.datasets[1].label = this.precipLabel();
     this.chart.update();
   }
 }

@@ -48,7 +48,7 @@ export class GeoService {
   currentPosition(): Promise<GeolocationPosition> {
     return new Promise((resolve, reject) => {
       if (!('geolocation' in navigator)) {
-        reject(new Error('Geolocation is not supported by this browser.'));
+        reject(new Error('errors.geoUnsupported'));
         return;
       }
       navigator.geolocation.getCurrentPosition(resolve, reject, {

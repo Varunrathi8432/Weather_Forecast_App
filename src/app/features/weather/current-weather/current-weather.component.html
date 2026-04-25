@@ -5,7 +5,7 @@
         {{ location().name }}
         @if (location().country) { <span class="country">, {{ location().country }}</span> }
       </h2>
-      <p class="time">{{ current().time | date: 'EEEE, MMM d · HH:mm' }}</p>
+      <p class="time">{{ current().time | date: 'EEEE, MMM d · HH:mm' : undefined : currentLocale() }}</p>
     </div>
     <div class="head-actions">
       <button
@@ -35,7 +35,7 @@
       <div class="temp">
         {{ current().temperature | number: '1.0-0' }}<span class="unit">{{ tempUnit() }}</span>
       </div>
-      <div class="label">{{ info().label }}</div>
+      <div class="label">{{ info().labelKey | translate }}</div>
       <div class="feels">
         {{ 'current.feelsLike' | translate }}
         {{ current().apparentTemperature | number: '1.0-0' }}{{ tempUnit() }}

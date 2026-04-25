@@ -17,13 +17,19 @@ interface SuggestionContext {
   units: Units;
 }
 
+interface RuleResult {
+  score: number;
+  rationaleKey: string;
+  rationaleParams: Record<string, string | number>;
+}
+
 interface Rule {
   id: string;
   category: ActivitySuggestion['category'];
-  title: string;
+  titleKey: string;
   icon: string;
-  /** Returns a score from 0–1 indicating fit; rationale explains why. */
-  evaluate: (ctx: SuggestionContext) => { score: number; rationale: string } | null;
+  /** Returns a score from 0–1 indicating fit; rationale describes why. */
+  evaluate: (ctx: SuggestionContext) => RuleResult | null;
 }
 
 /**
@@ -36,7 +42,7 @@ const RULES: Rule[] = [
   {
     id: 'running',
     category: 'fitness',
-    title: 'Great conditions for a run',
+    titleKey: 'suggestions.running.title',
     icon: '🏃',
     evaluate: ({ current, today, airQuality }) => {
       const tempC = toC(current.temperature);
@@ -49,14 +55,19 @@ const RULES: Rule[] = [
       if (score < 0.45) return null;
       return {
         score,
-        rationale: `Low rain risk (${today.precipitationProbability}%), manageable wind (${Math.round(current.windSpeed)}), temps near ${Math.round(tempC)}°C.`,
+        rationaleKey: 'suggestions.running.rationale',
+        rationaleParams: {
+          pop: today.precipitationProbability,
+          wind: Math.round(current.windSpeed),
+          temp: Math.round(tempC),
+        },
       };
     },
   },
   {
     id: 'cycling',
     category: 'fitness',
-    title: 'Good weather for cycling',
+    titleKey: 'suggestions.cycling.title',
     icon: '🚴',
     evaluate: ({ current, today }) => {
       if (today.precipitationProbability > 35 || current.windSpeed >= 40) return null;
@@ -67,14 +78,19 @@ const RULES: Rule[] = [
       if (score < 0.4) return null;
       return {
         score,
-        rationale: `Mild ${Math.round(tempC)}°C with wind ${Math.round(current.windSpeed)} km/h and ${today.precipitationProbability}% rain chance.`,
+        rationaleKey: 'suggestions.cycling.rationale',
+        rationaleParams: {
+          temp: Math.round(tempC),
+          wind: Math.round(current.windSpeed),
+          pop: today.precipitationProbability,
+        },
       };
     },
   },
   {
     id: 'picnic',
     category: 'outdoor',
-    title: 'Pack a picnic',
+    titleKey: 'suggestions.picnic.title',
     icon: '🧺',
     evaluate: ({ current, today }) => {
       if (today.precipitationProbability > 25) return null;
@@ -84,14 +100,18 @@ const RULES: Rule[] = [
       if (score < 0.4) return null;
       return {
         score,
-        rationale: `Dry day (${today.precipitationProbability}% rain) with comfortable ${Math.round(tempC)}°C.`,
+        rationaleKey: 'suggestions.picnic.rationale',
+        rationaleParams: {
+          pop: today.precipitationProbability,
+          temp: Math.round(tempC),
+        },
       };
     },
   },
   {
     id: 'stargazing',
     category: 'outdoor',
-    title: 'Clear skies for stargazing',
+    titleKey: 'suggestions.stargazing.title',
     icon: '🔭',
     evaluate: ({ current, today }) => {
       if (current.cloudCover >= 40) return null;
@@ -100,56 +120,68 @@ const RULES: Rule[] = [
       if (score < 0.5) return null;
       return {
         score,
-        rationale: `Only ${Math.round(current.cloudCover)}% cloud cover expected tonight.`,
+        rationaleKey: 'suggestions.stargazing.rationale',
+        rationaleParams: {
+          cloud: Math.round(current.cloudCover),
+        },
       };
     },
   },
   {
     id: 'museum',
     category: 'travel',
-    title: 'Great day for museums',
+    titleKey: 'suggestions.museum.title',
     icon: '🏛️',
     evaluate: ({ today, current }) => {
       if (today.precipitationProbability < 50 && current.cloudCover < 60) return null;
       const score = clamp(today.precipitationProbability / 100 * 0.8 + (current.cloudCover / 100) * 0.2);
       return {
         score,
-        rationale: `Rain probability ${today.precipitationProbability}% — a perfect indoor day.`,
+        rationaleKey: 'suggestions.museum.rationale',
+        rationaleParams: {
+          pop: today.precipitationProbability,
+        },
       };
     },
   },
   {
     id: 'uv-protection',
     category: 'health',
-    title: 'Apply sunscreen + sunglasses',
+    titleKey: 'suggestions.uvProtection.title',
     icon: '🧴',
     evaluate: ({ today, airQuality }) => {
       const uv = airQuality?.uvIndex ?? today.uvIndexMax;
       if (uv < 6) return null;
       return {
         score: clamp(Math.min(uv / 11, 1)),
-        rationale: `UV index peaks at ${uv.toFixed(1)} — high exposure risk without protection.`,
+        rationaleKey: 'suggestions.uvProtection.rationale',
+        rationaleParams: {
+          uv: uv.toFixed(1),
+        },
       };
     },
   },
   {
     id: 'hydrate',
     category: 'health',
-    title: 'Hydrate frequently',
+    titleKey: 'suggestions.hydrate.title',
     icon: '💧',
     evaluate: ({ current }) => {
       const tempC = toC(current.temperature);
       if (tempC < 26) return null;
       return {
         score: clamp((tempC - 25) / 15),
-        rationale: `Feels like ${Math.round(toC(current.apparentTemperature))}°C — carry water.`,
+        rationaleKey: 'suggestions.hydrate.rationale',
+        rationaleParams: {
+          feels: Math.round(toC(current.apparentTemperature)),
+        },
       };
     },
   },
   {
     id: 'layers',
     category: 'wardrobe',
-    title: 'Dress in warm layers',
+    titleKey: 'suggestions.layers.title',
     icon: '🧥',
     evaluate: ({ current, today }) => {
       const tempC = toC(current.temperature);
@@ -158,34 +190,44 @@ const RULES: Rule[] = [
       const score = clamp(0.5 + spread / 20);
       return {
         score,
-        rationale: `Cold ${Math.round(tempC)}°C with ${Math.round(spread)}°C spread today.`,
+        rationaleKey: 'suggestions.layers.rationale',
+        rationaleParams: {
+          temp: Math.round(tempC),
+          spread: Math.round(spread),
+        },
       };
     },
   },
   {
     id: 'umbrella',
     category: 'wardrobe',
-    title: 'Grab an umbrella',
+    titleKey: 'suggestions.umbrella.title',
     icon: '☂️',
     evaluate: ({ today, hourly }) => {
       const max = Math.max(today.precipitationProbability, ...hourly.slice(0, 12).map((h) => h.precipitationProbability));
       if (max < 40) return null;
       return {
         score: clamp(max / 100),
-        rationale: `Up to ${max}% chance of rain in the next 12 hours.`,
+        rationaleKey: 'suggestions.umbrella.rationale',
+        rationaleParams: {
+          pop: max,
+        },
       };
     },
   },
   {
     id: 'mask',
     category: 'health',
-    title: 'Consider a mask outdoors',
+    titleKey: 'suggestions.mask.title',
     icon: '😷',
     evaluate: ({ airQuality }) => {
       if (!airQuality || airQuality.europeanAqi < 80) return null;
       return {
         score: clamp(airQuality.europeanAqi / 120),
-        rationale: `European AQI is ${Math.round(airQuality.europeanAqi)} — sensitive groups should limit exposure.`,
+        rationaleKey: 'suggestions.mask.rationale',
+        rationaleParams: {
+          aqi: Math.round(airQuality.europeanAqi),
+        },
       };
     },
   },
@@ -194,21 +236,21 @@ const RULES: Rule[] = [
 @Injectable({ providedIn: 'root' })
 export class SuggestionsService {
   recommend(ctx: SuggestionContext, limit = 4): ActivitySuggestion[] {
-    return RULES.map((rule) => {
+    const items: ActivitySuggestion[] = [];
+    for (const rule of RULES) {
       const result = rule.evaluate(ctx);
-      if (!result) return null;
-      return {
+      if (!result) continue;
+      items.push({
         id: rule.id,
         category: rule.category,
-        title: rule.title,
-        rationale: result.rationale,
+        titleKey: rule.titleKey,
+        rationaleKey: result.rationaleKey,
+        rationaleParams: result.rationaleParams,
         score: result.score,
         icon: rule.icon,
-      } satisfies ActivitySuggestion;
-    })
-      .filter((s): s is ActivitySuggestion => s !== null)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limit);
+      });
+    }
+    return items.sort((a, b) => b.score - a.score).slice(0, limit);
   }
 }
 

@@ -6,6 +6,7 @@ type Handler = (event: KeyboardEvent) => void;
 
 interface ShortcutDefinition {
   key: string;
+  /** Translation key for the shortcut description (resolved at render time). */
   description: string;
   handler: Handler;
 }

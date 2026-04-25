@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { ChildrenOutletContexts, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { ThemeService } from '@core/services/theme.service';
 import { PreferencesService } from '@core/services/preferences.service';
@@ -10,9 +11,9 @@ import { OfflineBannerComponent } from '@shared/components/offline-banner/offlin
 import { ShortcutHelpComponent } from '@features/shortcuts/shortcut-help/shortcut-help.component';
 import { ShortcutsService } from '@core/services/shortcuts.service';
 import { routeFade } from '@core/animations/animations';
-import { AppSelectComponent, AppSelectOption } from '@shared/components/app-select/app-select.component';
-import { Language } from '@core/models/weather.model';
-
+import { AppSelectComponent } from '@shared/components/app-select/app-select.component';
+import type { AppSelectOption } from '@shared/components/app-select/app-select.component';
+import type { Language } from '@core/models/weather.model';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -39,12 +40,16 @@ export class AppComponent {
   protected readonly prefs = inject(PreferencesService);
   protected readonly loading = inject(LoadingService);
 
-  protected readonly languageOptions: AppSelectOption<Language>[] = [
-    { value: 'en', label: 'English' },
-    { value: 'es', label: 'Español' },
-    { value: 'fr', label: 'Français' },
-    { value: 'hi', label: 'हिन्दी' },
-  ];
+  private readonly langChange = toSignal(this.translate.onLangChange);
+
+  protected readonly languageOptions = computed<AppSelectOption<Language>[]>(() => {
+    this.langChange();
+    this.prefs.language();
+    return (['en', 'es', 'fr', 'hi'] as const).map((code) => ({
+      value: code,
+      label: this.translate.instant(`languages.${code}`),
+    }));
+  });
 
   constructor() {
     this.translate.addLangs(['en', 'es', 'fr', 'hi']);
@@ -55,12 +60,12 @@ export class AppComponent {
       document.documentElement.lang = lang;
     });
 
-    this.shortcuts.register('/', 'Focus the search bar', () => {
+    this.shortcuts.register('/', 'shortcuts.focusSearch', () => {
       const el = document.getElementById('city-input');
       (el as HTMLInputElement | null)?.focus();
     });
-    this.shortcuts.register('t', 'Toggle light / dark theme', () => this.theme.toggle());
-    this.shortcuts.register('u', 'Toggle metric / imperial units', () => this.prefs.toggleUnits());
+    this.shortcuts.register('t', 'shortcuts.toggleTheme', () => this.theme.toggle());
+    this.shortcuts.register('u', 'shortcuts.toggleUnits', () => this.prefs.toggleUnits());
   }
 
   getAnimation(): string {

@@ -1,5 +1,6 @@
 import { Injectable, computed, effect, inject, signal, untracked } from '@angular/core';
 import { catchError, EMPTY, finalize, tap } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 import { GeoLocation, WeatherBundle } from '@core/models/weather.model';
 import { GeoService } from '@core/services/geo.service';
@@ -34,6 +35,7 @@ export class WeatherStore {
   private readonly geo = inject(GeoService);
   private readonly prefs = inject(PreferencesService);
   private readonly errors = inject(ErrorService);
+  private readonly translate = inject(TranslateService);
 
   private readonly _selected = signal<GeoLocation | null>(readSelected());
   private readonly _bundle = signal<WeatherBundle | null>(readBundle());
@@ -87,14 +89,16 @@ export class WeatherStore {
             if (loc) this.select(loc);
           },
           error: () => {
-            this.errors.push('Could not resolve your location.');
+            this.errors.push(this.translate.instant('errors.geoResolve'));
             this._loading.set(false);
           },
         });
     } catch (err) {
-      this.errors.push(
-        err instanceof Error ? err.message : 'Geolocation permission denied.',
-      );
+      const message =
+        err instanceof Error && err.message.startsWith('errors.')
+          ? this.translate.instant(err.message)
+          : this.translate.instant('errors.geoPermission');
+      this.errors.push(message);
       this._loading.set(false);
     }
   }

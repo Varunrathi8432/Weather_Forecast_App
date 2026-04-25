@@ -5,6 +5,10 @@ import {
   isDevMode,
   provideZoneChangeDetection,
 } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import localeFr from '@angular/common/locales/fr';
+import localeHi from '@angular/common/locales/hi';
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -21,6 +25,10 @@ import { routes } from './app.routes';
 import { errorInterceptor } from '@core/interceptors/error.interceptor';
 import { loadingInterceptor } from '@core/interceptors/loading.interceptor';
 import { ConfigService } from '@core/services/config.service';
+
+registerLocaleData(localeEs);
+registerLocaleData(localeFr);
+registerLocaleData(localeHi);
 
 export function httpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

@@ -1,19 +1,19 @@
 <div
   class="top-progress"
   role="progressbar"
-  aria-label="Loading"
+  [attr.aria-label]="'app.loading' | translate"
   [class.active]="loading.pending()"
   [attr.aria-hidden]="!loading.pending()"
 ></div>
 
 <header class="app-header" role="banner">
   <div class="header-inner">
-    <a class="brand" routerLink="/" aria-label="Weather Forecast home">
+    <a class="brand" routerLink="/" [attr.aria-label]="'app.home' | translate">
       <span class="brand-icon" aria-hidden="true">⛅</span>
       <span class="brand-text">{{ 'app.title' | translate }}</span>
     </a>
 
-    <nav class="main-nav" aria-label="Primary">
+    <nav class="main-nav" [attr.aria-label]="'app.primaryNav' | translate">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         {{ 'nav.home' | translate }}
       </a>
@@ -26,7 +26,7 @@
     <div class="header-actions">
       <app-select
         class="lang-select"
-        [options]="languageOptions"
+        [options]="languageOptions()"
         [value]="prefs.language()"
         (valueChange)="prefs.setLanguage($event)"
         [ariaLabel]="'nav.language' | translate"
@@ -36,7 +36,9 @@
         type="button"
         class="icon-btn"
         (click)="toggleTheme()"
-        [attr.aria-label]="(theme.mode() === 'dark' ? 'nav.theme.light' : 'nav.theme.dark') | translate"
+        [attr.aria-label]="
+          (theme.mode() === 'dark' ? 'nav.theme.light' : 'nav.theme.dark') | translate
+        "
         [attr.aria-pressed]="theme.mode() === 'dark'"
       >
         <span aria-hidden="true">{{ theme.mode() === 'dark' ? '☀️' : '🌙' }}</span>

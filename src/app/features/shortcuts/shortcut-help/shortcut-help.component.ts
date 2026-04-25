@@ -13,13 +13,13 @@ import { ShortcutsService } from '@core/services/shortcuts.service';
       <div class="dialog" role="dialog" aria-modal="true" [attr.aria-label]="'shortcuts.title' | translate">
         <header>
           <h2>{{ 'shortcuts.title' | translate }}</h2>
-          <button type="button" (click)="close()" aria-label="Close">✕</button>
+          <button type="button" (click)="close()" [attr.aria-label]="'common.close' | translate">✕</button>
         </header>
         <dl>
           @for (s of shortcuts.list(); track s.key) {
             <div>
               <dt><kbd>{{ s.key }}</kbd></dt>
-              <dd>{{ s.description }}</dd>
+              <dd>{{ s.description | translate }}</dd>
             </div>
           }
           <div>

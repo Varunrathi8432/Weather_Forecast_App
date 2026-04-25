@@ -14,7 +14,7 @@ import { ActivitySuggestion } from '@core/models/weather.model';
     <section class="suggestions" [attr.aria-label]="'suggestions.heading' | translate">
       <header>
         <h2>{{ 'suggestions.heading' | translate }}</h2>
-        <span class="tag" title="Rule-based activity scoring">{{ 'suggestions.tag' | translate }}</span>
+        <span class="tag" [title]="'suggestions.subtitle' | translate">{{ 'suggestions.tag' | translate }}</span>
       </header>
       @if (items().length === 0) {
         <p class="empty">{{ 'suggestions.empty' | translate }}</p>
@@ -25,12 +25,12 @@ import { ActivitySuggestion } from '@core/models/weather.model';
               <span class="icon" aria-hidden="true">{{ s.icon }}</span>
               <div class="body">
                 <div class="title-row">
-                  <strong>{{ s.title }}</strong>
-                  <span class="score" [attr.aria-label]="'Fit score ' + ((s.score * 100) | number:'1.0-0') + '%'">
+                  <strong>{{ s.titleKey | translate }}</strong>
+                  <span class="score" [attr.aria-label]="'suggestions.fitScore' | translate: { score: (s.score * 100 | number:'1.0-0') }">
                     {{ s.score * 100 | number: '1.0-0' }}%
                   </span>
                 </div>
-                <p>{{ s.rationale }}</p>
+                <p>{{ s.rationaleKey | translate: s.rationaleParams }}</p>
               </div>
             </li>
           }

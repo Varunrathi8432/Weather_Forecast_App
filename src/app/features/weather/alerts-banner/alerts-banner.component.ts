@@ -16,8 +16,8 @@ import { WeatherAlert } from '@core/models/weather.model';
           <article class="alert" [class]="alert.severity" @cardEnter>
             <div class="icon" aria-hidden="true">{{ iconFor(alert.severity) }}</div>
             <div class="body">
-              <h3>{{ alert.title }}</h3>
-              <p>{{ alert.description }}</p>
+              <h3>{{ alert.titleKey | translate }}</h3>
+              <p>{{ alert.descriptionKey | translate: alert.params }}</p>
             </div>
           </article>
         }

@@ -1,7 +1,10 @@
 {
   "app": {
     "title": "Prévisions météo",
-    "footer": "Données d'Open-Meteo · Réalisé avec Angular"
+    "footer": "Données d'Open-Meteo · Réalisé avec Angular",
+    "home": "Accueil Prévisions météo",
+    "loading": "Chargement",
+    "primaryNav": "Principal"
   },
   "nav": {
     "home": "Accueil",
@@ -41,7 +44,9 @@
   },
   "hourly": {
     "heading": "Prochaines 24 h",
-    "ariaLabel": "Graphique horaire température et précipitations"
+    "ariaLabel": "Graphique horaire température et précipitations",
+    "tempLabel": "Temp ({{unit}})",
+    "precipLabel": "Précip (%)"
   },
   "favorites": {
     "title": "Lieux favoris",
@@ -61,7 +66,8 @@
     "emptyTitle": "Rien à comparer pour l'instant",
     "emptyBody": "Ajoutez une ville pour comparer les conditions.",
     "remove": "Retirer",
-    "clear": "Tout effacer"
+    "clear": "Tout effacer",
+    "maxReached": "Vous pouvez comparer jusqu'à {{max}} villes à la fois."
   },
   "map": {
     "title": "Vue carte",
@@ -88,6 +94,12 @@
     "keyboard": "Raccourcis clavier",
     "showShortcuts": "Afficher les raccourcis"
   },
+  "languages": {
+    "en": "Anglais",
+    "es": "Espagnol",
+    "fr": "Français",
+    "hi": "Hindi"
+  },
   "state": {
     "loading": "Chargement de la météo…",
     "welcomeTitle": "Bienvenue !",
@@ -95,19 +107,142 @@
     "offline": "Hors ligne — données en cache affichées.",
     "refresh": "Actualiser"
   },
-  "alerts": { "heading": "Alertes météo" },
-  "air": { "heading": "Qualité de l'air" },
-  "sun": { "sunrise": "Lever", "sunset": "Coucher" },
+  "alerts": {
+    "heading": "Alertes météo",
+    "wind": {
+      "title": "Fortes rafales de vent",
+      "description": "Rafales proches de {{gusts}} — sécurisez les objets extérieurs non fixés."
+    },
+    "rain": {
+      "title": "Précipitations intenses probables",
+      "description": "Probabilité de précipitations jusqu'à {{maxPop}}% dans les 48 h."
+    },
+    "uv": {
+      "title": "Indice UV très élevé",
+      "description": "Pic UV de {{uv}}. Utilisez de la crème solaire et limitez l'exposition à midi."
+    },
+    "aqi": {
+      "title": "Qualité de l'air dégradée",
+      "description": "AQI européen {{aqi}}. Les groupes sensibles doivent limiter l'activité extérieure."
+    }
+  },
+  "air": {
+    "heading": "Qualité de l'air",
+    "bands": {
+      "good": "Bonne",
+      "fair": "Acceptable",
+      "moderate": "Modérée",
+      "poor": "Mauvaise",
+      "veryPoor": "Très mauvaise",
+      "hazardous": "Dangereuse"
+    }
+  },
+  "sun": {
+    "sunrise": "Lever",
+    "sunset": "Coucher",
+    "aria": "Progression du jour {{pct}}%. Lever {{sunrise}}, coucher {{sunset}}."
+  },
+  "wind": {
+    "aria": "Vent du {{cardinal}} ({{degrees}}°) à {{speed}} {{unit}}."
+  },
+  "weatherCodes": {
+    "0": "Ciel dégagé",
+    "1": "Plutôt dégagé",
+    "2": "Partiellement nuageux",
+    "3": "Couvert",
+    "45": "Brouillard",
+    "48": "Brouillard givrant",
+    "51": "Bruine légère",
+    "53": "Bruine",
+    "55": "Bruine dense",
+    "56": "Bruine verglaçante",
+    "57": "Bruine verglaçante dense",
+    "61": "Pluie légère",
+    "63": "Pluie",
+    "65": "Forte pluie",
+    "66": "Pluie verglaçante",
+    "67": "Forte pluie verglaçante",
+    "71": "Neige légère",
+    "73": "Neige",
+    "75": "Forte neige",
+    "77": "Grains de neige",
+    "80": "Averses légères",
+    "81": "Averses",
+    "82": "Averses violentes",
+    "85": "Averses de neige",
+    "86": "Fortes averses de neige",
+    "95": "Orage",
+    "96": "Orage avec grêle",
+    "99": "Orage violent",
+    "unknown": "Inconnu"
+  },
   "suggestions": {
     "heading": "Suggestions du jour",
     "tag": "IA d'activités",
-    "empty": "Pas de recommandation forte — profitez de la journée !"
+    "subtitle": "Score d'activité basé sur des règles",
+    "fitScore": "Score d'adéquation {{score}}%",
+    "empty": "Pas de recommandation forte — profitez de la journée !",
+    "running": {
+      "title": "Bonnes conditions pour courir",
+      "rationale": "Faible risque de pluie ({{pop}}%), vent gérable ({{wind}}), températures proches de {{temp}}°C."
+    },
+    "cycling": {
+      "title": "Bon temps pour le vélo",
+      "rationale": "Doux {{temp}}°C avec vent {{wind}} km/h et {{pop}}% de risque de pluie."
+    },
+    "picnic": {
+      "title": "Préparez un pique-nique",
+      "rationale": "Journée sèche ({{pop}}% de pluie) avec un confortable {{temp}}°C."
+    },
+    "stargazing": {
+      "title": "Ciel dégagé pour observer les étoiles",
+      "rationale": "Seulement {{cloud}}% de couverture nuageuse prévue ce soir."
+    },
+    "museum": {
+      "title": "Belle journée pour les musées",
+      "rationale": "Probabilité de pluie {{pop}}% — une parfaite journée d'intérieur."
+    },
+    "uvProtection": {
+      "title": "Crème solaire + lunettes",
+      "rationale": "Indice UV culmine à {{uv}} — risque élevé sans protection."
+    },
+    "hydrate": {
+      "title": "Hydratez-vous régulièrement",
+      "rationale": "Ressenti {{feels}}°C — emportez de l'eau."
+    },
+    "layers": {
+      "title": "Habillez-vous en couches chaudes",
+      "rationale": "Froid {{temp}}°C avec un écart de {{spread}}°C aujourd'hui."
+    },
+    "umbrella": {
+      "title": "Prenez un parapluie",
+      "rationale": "Jusqu'à {{pop}}% de probabilité de pluie dans les 12 prochaines heures."
+    },
+    "mask": {
+      "title": "Envisagez un masque à l'extérieur",
+      "rationale": "L'AQI européen est {{aqi}} — les groupes sensibles doivent limiter l'exposition."
+    }
   },
   "shortcuts": {
     "title": "Raccourcis clavier",
-    "toggle": "Afficher cette boîte"
+    "toggle": "Afficher cette boîte",
+    "close": "Fermer",
+    "focusSearch": "Activer la barre de recherche",
+    "toggleTheme": "Basculer thème clair / sombre",
+    "toggleUnits": "Basculer unités métriques / impériales"
   },
-  "a11y": {
-    "updated": "Prévisions mises à jour pour {{city}}. Actuellement {{temp}} degrés."
+  "common": {
+    "dismiss": "Fermer",
+    "close": "Fermer"
+  },
+  "errors": {
+    "geoResolve": "Impossible de déterminer votre position.",
+    "geoPermission": "Autorisation de géolocalisation refusée.",
+    "geoUnsupported": "La géolocalisation n'est pas prise en charge par ce navigateur.",
+    "network": "Erreur réseau — vérifiez votre connexion.",
+    "requestFailed": "Échec de la requête ({{status}}) : {{statusText}}",
+    "unknown": "Erreur inconnue",
+    "pushNotConfigured": "Les notifications push ne sont pas configurées.",
+    "pushSubscribeFailed": "Impossible d'activer les notifications."
   }
 }

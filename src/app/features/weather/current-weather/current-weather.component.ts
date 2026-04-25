@@ -29,6 +29,7 @@ export class CurrentWeatherComponent {
   readonly precipUnit = computed(() => (this.prefs.units() === 'imperial' ? 'in' : 'mm'));
 
   readonly isFavorite = computed(() => this.prefs.isFavorite(this.location().id));
+  readonly currentLocale = computed(() => this.prefs.language());
 
   toggleFavorite(): void {
     this.prefs.toggleFavorite(this.location());
@@ -37,10 +38,11 @@ export class CurrentWeatherComponent {
   async share(): Promise<void> {
     const loc = this.location();
     const current = this.current();
-    const text = `${loc.name}: ${Math.round(current.temperature)}${this.tempUnit()} · ${this.info().label}`;
+    const conditionLabel = this.translate.instant(this.info().labelKey);
+    const text = `${loc.name}: ${Math.round(current.temperature)}${this.tempUnit()} · ${conditionLabel}`;
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'Weather Forecast', text, url: location.href });
+        await navigator.share({ title: this.translate.instant('app.title'), text, url: location.href });
         return;
       } catch {
         // user cancelled

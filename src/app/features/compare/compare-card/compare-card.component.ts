@@ -25,7 +25,7 @@ import { describeWeatherCode } from '@core/constants/weather-codes';
         <span class="icon" aria-hidden="true">{{ info().icon }}</span>
         <div>
           <div class="temp">{{ bundle().current.temperature | number: '1.0-0' }}{{ tempUnit() }}</div>
-          <div class="label">{{ info().label }}</div>
+          <div class="label">{{ info().labelKey | translate }}</div>
         </div>
       </div>
       <dl>

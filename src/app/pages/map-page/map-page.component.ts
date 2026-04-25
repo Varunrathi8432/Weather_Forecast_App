@@ -1,13 +1,5 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  OnDestroy,
-  effect,
-  inject,
-  viewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, viewChild } from '@angular/core';
+import type { AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import * as L from 'leaflet';
 
@@ -39,9 +31,18 @@ import { PreferencesService } from '@core/services/preferences.service';
   `,
   styles: [
     `
-      .page { display: grid; gap: 1rem; }
-      h1 { margin: 0; font-size: clamp(1.25rem, 4vw, 1.75rem); }
-      .page-header p { margin: 0.25rem 0 0; color: var(--text-muted); }
+      .page {
+        display: grid;
+        gap: 1rem;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+      }
+      .page-header p {
+        margin: 0.25rem 0 0;
+        color: var(--text-muted);
+      }
       .map {
         width: 100%;
         height: clamp(320px, 65vh, 640px);
@@ -76,10 +77,7 @@ export class MapPageComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.map = L.map(this.mapEl().nativeElement, { zoomControl: true }).setView(
-      [20, 0],
-      2,
-    );
+    this.map = L.map(this.mapEl().nativeElement, { zoomControl: true }).setView([20, 0], 2);
     L.tileLayer(environment.mapTileUrl, {
       attribution: environment.mapAttribution,
       maxZoom: 18,

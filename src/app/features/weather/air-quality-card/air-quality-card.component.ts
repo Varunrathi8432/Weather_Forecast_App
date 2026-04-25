@@ -5,18 +5,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AirQualityReading } from '@core/models/weather.model';
 
 interface AqiBand {
-  label: string;
+  labelKey: string;
   className: 'good' | 'fair' | 'moderate' | 'poor' | 'very-poor' | 'hazardous';
   from: number;
 }
 
 const EUR_BANDS: AqiBand[] = [
-  { from: 0, label: 'Good', className: 'good' },
-  { from: 20, label: 'Fair', className: 'fair' },
-  { from: 40, label: 'Moderate', className: 'moderate' },
-  { from: 60, label: 'Poor', className: 'poor' },
-  { from: 80, label: 'Very poor', className: 'very-poor' },
-  { from: 100, label: 'Hazardous', className: 'hazardous' },
+  { from: 0, labelKey: 'air.bands.good', className: 'good' },
+  { from: 20, labelKey: 'air.bands.fair', className: 'fair' },
+  { from: 40, labelKey: 'air.bands.moderate', className: 'moderate' },
+  { from: 60, labelKey: 'air.bands.poor', className: 'poor' },
+  { from: 80, labelKey: 'air.bands.veryPoor', className: 'very-poor' },
+  { from: 100, labelKey: 'air.bands.hazardous', className: 'hazardous' },
 ];
 
 @Component({
@@ -27,7 +27,7 @@ const EUR_BANDS: AqiBand[] = [
     <section class="card" [attr.aria-label]="'air.heading' | translate">
       <header>
         <h2>{{ 'air.heading' | translate }}</h2>
-        <span class="band" [class]="band().className">{{ band().label }}</span>
+        <span class="band" [class]="band().className">{{ band().labelKey | translate }}</span>
       </header>
       <div class="main">
         <div class="aqi">

@@ -1,16 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ErrorService } from '@core/services/error.service';
 
 @Component({
   selector: 'app-error-toast',
   standalone: true,
+  imports: [TranslateModule],
   template: `
     <div class="toast-stack" role="status" aria-live="polite">
       @for (t of errors.messages(); track t.id) {
         <div class="toast" [class]="t.kind">
           <span>{{ t.text }}</span>
-          <button type="button" (click)="errors.dismiss(t.id)" aria-label="Dismiss">✕</button>
+          <button type="button" (click)="errors.dismiss(t.id)" [attr.aria-label]="'common.dismiss' | translate">✕</button>
         </div>
       }
     </div>

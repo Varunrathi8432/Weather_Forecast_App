@@ -18,6 +18,7 @@ export class ForecastComponent {
   private readonly prefs = inject(PreferencesService);
   readonly daily = input.required<DailyForecastEntry[]>();
   readonly tempUnit = computed(() => (this.prefs.units() === 'imperial' ? '°F' : '°C'));
+  readonly currentLocale = computed(() => this.prefs.language());
 
   info(code: number) {
     return describeWeatherCode(code);

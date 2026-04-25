@@ -1,7 +1,10 @@
 {
   "app": {
     "title": "Weather Forecast",
-    "footer": "Data from Open-Meteo · Built with Angular"
+    "footer": "Data from Open-Meteo · Built with Angular",
+    "home": "Weather Forecast home",
+    "loading": "Loading",
+    "primaryNav": "Primary"
   },
   "nav": {
     "home": "Home",
@@ -41,7 +44,9 @@
   },
   "hourly": {
     "heading": "Next 24 hours",
-    "ariaLabel": "Hourly temperature and precipitation chart"
+    "ariaLabel": "Hourly temperature and precipitation chart",
+    "tempLabel": "Temp ({{unit}})",
+    "precipLabel": "Precip (%)"
   },
   "favorites": {
     "title": "Favorite locations",
@@ -61,7 +66,8 @@
     "emptyTitle": "Nothing to compare yet",
     "emptyBody": "Add a city to start comparing current conditions.",
     "remove": "Remove",
-    "clear": "Clear all"
+    "clear": "Clear all",
+    "maxReached": "You can compare up to {{max}} cities at once."
   },
   "map": {
     "title": "Map view",
@@ -88,6 +94,12 @@
     "keyboard": "Keyboard shortcuts",
     "showShortcuts": "Show shortcuts"
   },
+  "languages": {
+    "en": "English",
+    "es": "Spanish",
+    "fr": "French",
+    "hi": "Hindi"
+  },
   "state": {
     "loading": "Loading weather…",
     "welcomeTitle": "Welcome!",
@@ -96,25 +108,141 @@
     "refresh": "Refresh current weather"
   },
   "alerts": {
-    "heading": "Weather alerts"
+    "heading": "Weather alerts",
+    "wind": {
+      "title": "High wind gusts",
+      "description": "Gusts near {{gusts}} — secure loose outdoor items."
+    },
+    "rain": {
+      "title": "Heavy precipitation likely",
+      "description": "Precipitation probability up to {{maxPop}}% in the next 48h."
+    },
+    "uv": {
+      "title": "Very high UV index",
+      "description": "Peak UV of {{uv}}. Use sunscreen and limit midday exposure."
+    },
+    "aqi": {
+      "title": "Reduced air quality",
+      "description": "European AQI {{aqi}}. Sensitive groups should limit outdoor activity."
+    }
   },
   "air": {
-    "heading": "Air quality"
+    "heading": "Air quality",
+    "bands": {
+      "good": "Good",
+      "fair": "Fair",
+      "moderate": "Moderate",
+      "poor": "Poor",
+      "veryPoor": "Very poor",
+      "hazardous": "Hazardous"
+    }
   },
   "sun": {
     "sunrise": "Sunrise",
-    "sunset": "Sunset"
+    "sunset": "Sunset",
+    "aria": "Daylight progress {{pct}}%. Sunrise {{sunrise}}, sunset {{sunset}}."
+  },
+  "wind": {
+    "aria": "Wind from {{cardinal}} ({{degrees}}°) at {{speed}} {{unit}}."
+  },
+  "weatherCodes": {
+    "0": "Clear sky",
+    "1": "Mainly clear",
+    "2": "Partly cloudy",
+    "3": "Overcast",
+    "45": "Fog",
+    "48": "Depositing rime fog",
+    "51": "Light drizzle",
+    "53": "Drizzle",
+    "55": "Dense drizzle",
+    "56": "Freezing drizzle",
+    "57": "Dense freezing drizzle",
+    "61": "Light rain",
+    "63": "Rain",
+    "65": "Heavy rain",
+    "66": "Freezing rain",
+    "67": "Heavy freezing rain",
+    "71": "Light snow",
+    "73": "Snow",
+    "75": "Heavy snow",
+    "77": "Snow grains",
+    "80": "Light rain showers",
+    "81": "Rain showers",
+    "82": "Violent rain showers",
+    "85": "Snow showers",
+    "86": "Heavy snow showers",
+    "95": "Thunderstorm",
+    "96": "Thunderstorm with hail",
+    "99": "Severe thunderstorm",
+    "unknown": "Unknown"
   },
   "suggestions": {
     "heading": "Today's suggestions",
     "tag": "Activity AI",
-    "empty": "No strong recommendations — enjoy the day!"
+    "subtitle": "Rule-based activity scoring",
+    "fitScore": "Fit score {{score}}%",
+    "empty": "No strong recommendations — enjoy the day!",
+    "running": {
+      "title": "Great conditions for a run",
+      "rationale": "Low rain risk ({{pop}}%), manageable wind ({{wind}}), temps near {{temp}}°C."
+    },
+    "cycling": {
+      "title": "Good weather for cycling",
+      "rationale": "Mild {{temp}}°C with wind {{wind}} km/h and {{pop}}% rain chance."
+    },
+    "picnic": {
+      "title": "Pack a picnic",
+      "rationale": "Dry day ({{pop}}% rain) with comfortable {{temp}}°C."
+    },
+    "stargazing": {
+      "title": "Clear skies for stargazing",
+      "rationale": "Only {{cloud}}% cloud cover expected tonight."
+    },
+    "museum": {
+      "title": "Great day for museums",
+      "rationale": "Rain probability {{pop}}% — a perfect indoor day."
+    },
+    "uvProtection": {
+      "title": "Apply sunscreen + sunglasses",
+      "rationale": "UV index peaks at {{uv}} — high exposure risk without protection."
+    },
+    "hydrate": {
+      "title": "Hydrate frequently",
+      "rationale": "Feels like {{feels}}°C — carry water."
+    },
+    "layers": {
+      "title": "Dress in warm layers",
+      "rationale": "Cold {{temp}}°C with {{spread}}°C spread today."
+    },
+    "umbrella": {
+      "title": "Grab an umbrella",
+      "rationale": "Up to {{pop}}% chance of rain in the next 12 hours."
+    },
+    "mask": {
+      "title": "Consider a mask outdoors",
+      "rationale": "European AQI is {{aqi}} — sensitive groups should limit exposure."
+    }
   },
   "shortcuts": {
     "title": "Keyboard shortcuts",
-    "toggle": "Show this dialog"
+    "toggle": "Show this dialog",
+    "close": "Close",
+    "focusSearch": "Focus the search bar",
+    "toggleTheme": "Toggle light / dark theme",
+    "toggleUnits": "Toggle metric / imperial units"
   },
-  "a11y": {
-    "updated": "Forecast updated for {{city}}. Currently {{temp}} degrees."
+  "common": {
+    "dismiss": "Dismiss",
+    "close": "Close"
+  },
+  "errors": {
+    "geoResolve": "Could not resolve your location.",
+    "geoPermission": "Geolocation permission denied.",
+    "geoUnsupported": "Geolocation is not supported by this browser.",
+    "network": "Network error — please check your connection.",
+    "requestFailed": "Request failed ({{status}}): {{statusText}}",
+    "unknown": "Unknown error",
+    "pushNotConfigured": "Push notifications are not configured.",
+    "pushSubscribeFailed": "Unable to enable notifications."
   }
 }

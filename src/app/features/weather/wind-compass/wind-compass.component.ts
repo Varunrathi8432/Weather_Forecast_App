@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-wind-compass',
@@ -82,6 +83,9 @@ import { TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WindCompassComponent {
+  private readonly translate = inject(TranslateService);
+  private readonly langTick = toSignal(this.translate.onLangChange);
+
   readonly direction = input.required<number>();
   readonly speed = input<number>(0);
   readonly unitLabel = input<string>('km/h');
@@ -91,9 +95,15 @@ export class WindCompassComponent {
 
   readonly rotation = computed(() => `rotate(${this.direction()}deg)`);
   readonly cardinal = computed(() => toCardinal(this.direction()));
-  readonly ariaLabel = computed(
-    () => `Wind from ${this.cardinal()} (${Math.round(this.direction())}°) at ${this.speed()} ${this.unitLabel()}.`,
-  );
+  readonly ariaLabel = computed(() => {
+    this.langTick();
+    return this.translate.instant('wind.aria', {
+      cardinal: this.cardinal(),
+      degrees: Math.round(this.direction()),
+      speed: this.speed(),
+      unit: this.unitLabel(),
+    });
+  });
 }
 
 function toCardinal(bearing: number): string {
